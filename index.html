@@ -1,280 +1,546 @@
 <!DOCTYPE html>
-<!-- saved from url=(0061)file:///C:/Users/alexa/Downloads/online_viewer_net%20(1).htm# -->
-<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html lang="fr">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Portfolio - Prénom Nom</title>
-    <link href="./Mon Portfolio - Prénom Nom en cours_files/css2" rel="stylesheet">
+    <title>Portfolio - Alexandre LASTENNET-GUILLEMENOT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- 1. LE STYLE (DESIGN) --- */
+        /* ==================================================================
+           ZONE CONFIGURATION
+           ================================================================== */
         :root {
-            --primary: #2563eb; /* Bleu */
-            --dark: #0f172a;    /* Fond sombre */
-            --light: #f8fafc;   /* Fond clair */
-            --text: #334155;    /* Gris texte */
+            --primary: #2563eb;       
+            --primary-dark: #1e40af;
+            --dark: #0f172a;          
+            --light: #f1f5f9;         
             --white: #ffffff;
+            --text-grey: #64748b;
+            
+            /* COULEURS DES COMPÉTENCES GEII */
+            --c-concevoir: #2563eb;   
+            --c-verifier: #10b981;    
+            --c-maintenir: #f59e0b;   
+            --c-implanter: #8b5cf6;   
         }
 
+        /* --- BASE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--light);
-            color: var(--text);
+            color: var(--dark);
             line-height: 1.6;
-            padding-top: 70px; /* Espace pour le menu fixe */
+            padding-top: 70px;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            display: flex; flex-direction: column;
         }
 
-        /* NAVIGATION FIXE */
+        /* --- NAVIGATION --- */
         nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: var(--white);
-            border-bottom: 1px solid #e2e8f0;
-            z-index: 1000;
-            padding: 0 20px;
+            position: fixed; top: 0; width: 100%; background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px); border-bottom: 1px solid #e2e8f0; z-index: 1000; padding: 0 20px;
         }
-
         .nav-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            height: 70px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            max-width: 1000px; margin: 0 auto; height: 70px;
+            display: flex; justify-content: space-between; align-items: center;
         }
-
-        .logo { font-weight: 700; font-size: 1.2rem; color: var(--dark); cursor: pointer; }
-
-        .menu button {
-            background: none;
-            border: none;
-            font-family: inherit;
-            font-size: 1rem;
-            margin-left: 20px;
-            cursor: pointer;
-            color: var(--text);
-            padding: 8px 12px;
-            border-radius: 6px;
-            transition: 0.3s;
-        }
-
-        .menu button:hover, .menu button.active {
-            background-color: #eff6ff;
-            color: var(--primary);
-            font-weight: 600;
-        }
-
-        /* CONTENU DES PAGES */
-        main {
-            flex: 1;
-            max-width: 1000px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        /* Par défaut, on cache toutes les sections, le JS affichera la bonne */
-        .page-section {
-            display: none; /* Caché par défaut */
-            animation: fadeIn 0.5s ease;
-        }
-
-        /* La classe qui rend visible */
-        .page-section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* PAGE ACCUEIL */
-        .hero { text-align: center; padding: 60px 0; }
-        .hero h1 { font-size: 3rem; color: var(--dark); margin-bottom: 10px; }
-        .hero h2 { font-size: 1.5rem; color: var(--primary); margin-bottom: 20px; font-weight: 400; }
-        .hero p { max-width: 600px; margin: 0 auto 30px auto; font-size: 1.1rem; }
+        .logo { font-weight: 700; font-size: 1.2rem; cursor: pointer; color: var(--primary); }
         
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
+        .menu button {
+            background: none; border: none; font-family: inherit; font-size: 1rem;
+            margin-left: 10px; cursor: pointer; color: var(--text-grey);
+            padding: 8px 12px; border-radius: 6px; transition: 0.3s;
+        }
+        .menu button:hover, .menu button.active {
+            background-color: #eff6ff; color: var(--primary); font-weight: 600;
         }
 
-        /* PAGE CV */
-        .cv-block { background: white; padding: 25px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #e2e8f0; }
-        .cv-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
-        .cv-date { color: var(--primary); font-weight: 600; font-size: 0.9rem; }
+        /* --- CONTENU --- */
+        main { flex: 1; max-width: 1000px; width: 100%; margin: 0 auto; padding: 40px 20px; }
+        
+        .page-section { display: none; animation: fadeIn 0.4s ease-out; }
+        .page-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* PAGE PROJETS (Grille) */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .card { background: white; border-radius: 10px; overflow: hidden; border: 1px solid #e2e8f0; transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-        .card-img { height: 180px; background: #cbd5e1; display: flex; align-items: center; justify-content: center; color: #64748b; }
-        .card-body { padding: 20px; }
-        .card h3 { margin-bottom: 10px; color: var(--dark); }
+        h1, h2, h3 { color: var(--dark); }
+        .btn-primary {
+            background: var(--primary); color: white; padding: 12px 25px; border-radius: 50px;
+            text-decoration: none; font-weight: 600; border: none; cursor: pointer;
+            display: inline-block; transition: 0.3s;
+        }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
 
-        /* PAGE CONTACT */
-        .contact-box { text-align: center; background: white; padding: 40px; border-radius: 12px; }
+        /* --- ELEMENTS COMMUNS --- */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
 
-        /* FOOTER */
-        footer { text-align: center; padding: 20px; color: #94a3b8; font-size: 0.9rem; margin-top: 40px; }
+        .module-card { 
+            background: var(--white); padding: 25px; border-radius: 12px; margin-bottom: 20px;
+            border: 1px solid #e2e8f0; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .module-header { display: flex; justify-content: space-between; margin-bottom: 8px; flex-wrap: wrap; }
+        .module-date { color: var(--primary); font-weight: 600; font-size: 0.9rem; }
 
+        .clickable-card { cursor: pointer; transition: all 0.3s ease; position: relative; }
+        .clickable-card:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(37, 99, 235, 0.1); }
+        .clickable-card::after { content: "Voir le détail →"; position: absolute; bottom: 20px; right: 20px; font-size: 0.85rem; font-weight: bold; color: var(--primary); opacity: 0; transition: 0.3s; }
+        .clickable-card:hover::after { opacity: 1; }
+
+        /* --- PAGE ACCUEIL --- */
+        #home { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 80vh; }
+        #home .hero { padding: 20px 0 40px 0; text-align: center; }
+        #home .grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 25px; width: 100%; }
+        #home .module-card { width: 100%; max-width: 350px; }
+
+        /* --- CARTE PROJET (Vignette) --- */
+        .card { background: var(--white); border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; transition: 0.3s; cursor: pointer; display: flex; flex-direction: column; height: 100%; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(37, 99, 235, 0.1); border-color: var(--primary); }
+        
+        .card-img { 
+            height: 220px; 
+            background-color: #f8fafc;
+            display: flex; align-items: center; justify-content: center; 
+            color: #64748b; font-weight: bold;
+            background-size: contain;       
+            background-position: center;    
+            background-repeat: no-repeat;   
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        .card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+        .tags-container { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+        .tag { background: #eff6ff; color: var(--primary); padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+
+        /* --- CARTE INTÉRÊT (Style horizontal) --- */
+        #interests-grid-container { display: flex; flex-direction: column; gap: 20px; }
+        #interests-grid-container .card { flex-direction: row; min-height: 140px; align-items: stretch; }
+        #interests-grid-container .card-icon-header { width: 140px; flex-shrink: 0; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); display: flex; align-items: center; justify-content: center; font-size: 3.5rem; border-right: 1px solid #e2e8f0; }
+        #interests-grid-container .card-body { justify-content: center; }
+
+        /* --- CARTE MENTALE --- */
+        .mindmap-container { display: flex; flex-direction: column; align-items: center; padding: 20px 0; }
+        .mm-center { background: var(--dark); color: white; padding: 15px 40px; border-radius: 50px; font-weight: bold; font-size: 1.2rem; margin-bottom: 40px; position: relative; box-shadow: 0 4px 15px rgba(15, 23, 42, 0.3); z-index: 2; }
+        .mm-center::after { content: ''; position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%); width: 2px; height: 40px; background: #cbd5e1; z-index: 1; }
+        .mm-branches { display: flex; justify-content: center; gap: 20px; width: 100%; flex-wrap: wrap; position: relative; }
+        .mm-branches::before { content: ''; position: absolute; top: -20px; left: 12%; right: 12%; height: 2px; background: #cbd5e1; z-index: 0; }
+        .mm-branch { flex: 1; min-width: 200px; max-width: 240px; position: relative; background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); display: flex; flex-direction: column; }
+        .mm-branch::before { content: ''; position: absolute; top: -20px; left: 50%; transform: translateX(-50%); width: 2px; height: 20px; background: #cbd5e1; }
+        .mm-branch-header { font-size: 1rem; font-weight: 700; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid #f1f5f9; text-align: center; text-transform: uppercase; letter-spacing: 0.5px; }
+        .mm-list { list-style: none; padding: 0; font-size: 0.9rem; color: var(--text-grey); }
+        .mm-list li { margin-bottom: 8px; padding: 8px 10px; border-radius: 6px; background: #f8fafc; cursor: pointer; transition: 0.2s; border: 1px solid transparent; display: flex; align-items: center; }
+        .mm-list li:hover { background: #eff6ff; border-color: var(--primary); color: var(--primary); transform: translateX(3px); }
+        .mm-list li span { font-weight: 700; font-size: 0.75rem; margin-right: 10px; background: #e2e8f0; color: #475569; padding: 2px 6px; border-radius: 4px; }
+        .branch-1 .mm-branch-header { color: var(--c-concevoir); border-color: var(--c-concevoir); } .branch-1 .mm-list li:hover span { background: var(--c-concevoir); color: white; }
+        .branch-2 .mm-branch-header { color: var(--c-verifier); border-color: var(--c-verifier); } .branch-2 .mm-list li:hover span { background: var(--c-verifier); color: white; }
+        .branch-3 .mm-branch-header { color: var(--c-maintenir); border-color: var(--c-maintenir); } .branch-3 .mm-list li:hover span { background: var(--c-maintenir); color: white; }
+        .branch-4 .mm-branch-header { color: var(--c-implanter); border-color: var(--c-implanter); } .branch-4 .mm-list li:hover span { background: var(--c-implanter); color: white; }
+
+        /* --- MODAL --- */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 2000; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
+        .modal-overlay.open { display: flex; opacity: 1; }
+        .modal-content { background: white; width: 90%; max-width: 500px; padding: 30px; border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.2); position: relative; transform: translateY(20px); transition: transform 0.3s; }
+        .modal-overlay.open .modal-content { transform: translateY(0); }
+        .modal-close { position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #94a3b8; }
+        .modal-title { font-size: 1.2rem; margin-bottom: 10px; color: var(--primary); font-weight: bold; }
+        .modal-text { font-size: 1rem; color: var(--text-grey); line-height: 1.6; }
+
+        /* --- DETAILS PROJET & INTERET --- */
+        .btn-back { background: white; border: 1px solid #cbd5e1; padding: 8px 16px; border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; font-weight: 600; color: var(--text-grey); transition: 0.2s; }
+        .btn-back:hover { background: #f8fafc; color: var(--dark); border-color: var(--dark); }
+        
+        /* === IMAGE EN-TÊTE DÉTAIL (MODIFIÉ POUR CENTRAGE) === */
+        .detail-header-img { 
+            display: block;             /* Se comporte comme un bloc */
+            margin: 0 auto 30px auto;   /* Marges auto à gauche/droite pour centrer */
+            
+            width: auto;                /* Largeur auto (respecte ratio) */
+            height: auto;               /* Hauteur auto */
+            max-width: 100%;            /* Ne dépasse pas la largeur du conteneur */
+            max-height: 600px;          /* Ne dépasse pas 600px de haut */
+            
+            background: #ffffff; 
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            object-fit: contain;        /* Assure que le contenu est visible */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Petite ombre esthétique */
+        }
+        
+        /* Placeholder si pas d'image (texte centré) */
+        div.detail-header-img {
+            display: flex; align-items: center; justify-content: center;
+            height: 300px; width: 100%;
+            font-size: 1.5rem; color: #64748b;
+        }
+        
+        .detail-desc { font-size: 1.1rem; color: var(--dark); white-space: pre-line; margin-bottom: 30px; }
+        
+        /* === GALERIE CENTRÉE === */
+        .gallery-centered {
+            display: flex;
+            flex-wrap: wrap;        /* Retour à la ligne autorisé */
+            justify-content: center;/* Centre les éléments horizontalement */
+            gap: 20px;              /* Espace entre les photos */
+        }
+        
+        .gallery-item {
+            display: block;
+            width: auto;            /* La largeur s'adapte à l'image */
+            height: auto;           /* La hauteur s'adapte aussi */
+            max-width: 100%;        /* Pas plus large que l'écran */
+            max-height: 450px;      /* Hauteur max fixée pour uniformité */
+            
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            transition: 0.3s;
+            background: #f1f5f9;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .gallery-item:hover { transform: scale(1.02); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        
+        .hero { text-align: center; }
+        .hero h1 { font-size: 2.8rem; margin-bottom: 15px; line-height: 1.2; }
+        .hero h2 { font-size: 1.5rem; color: var(--primary); margin-bottom: 20px; font-weight: 400; }
+        footer { text-align: center; padding: 30px; color: var(--text-grey); font-size: 0.9rem; margin-top: 40px; border-top: 1px solid #e2e8f0; }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2rem; }
+            .menu button { font-size: 0.8rem; margin-left: 2px; padding: 5px 6px; }
+            #interests-grid-container .card { flex-direction: column; }
+            #interests-grid-container .card-icon-header { width: 100%; height: 100px; border-right: none; border-bottom: 1px solid #e2e8f0; }
+            .mm-branches { flex-direction: column; align-items: center; }
+            .mm-branches::before { display: none; }
+            .mm-branch { width: 100%; max-width: 100%; }
+            .mm-branch::before { height: 40px; top: -40px; }
+            .mm-center::after { height: 20px; bottom: -20px; }
+            
+            /* Mobile : Image moins haute */
+            .detail-header-img { max-height: 400px; }
+        }
     </style>
 </head>
 <body>
 
     <nav>
         <div class="nav-container">
-            <div class="logo" onclick="showPage(&#39;home&#39;)">Mon Portfolio</div>
+            <div class="logo" onclick="showPage('home')">ALEXANDRE.LG</div>
             <div class="menu">
-                <button onclick="showPage(&#39;home&#39;)" id="btn-home" class="">Accueil</button>
-                <button onclick="showPage(&#39;cv&#39;)" id="btn-cv" class="">Mon CV</button>
-                <button onclick="showPage(&#39;projects&#39;)" id="btn-projects" class="active">Projets</button>
-                <button onclick="showPage(&#39;contact&#39;)" id="btn-contact">Contact</button>
+                <button onclick="showPage('home')" id="btn-home">Accueil</button>
+                <button onclick="showPage('cv')" id="btn-cv">CV</button>
+                <button onclick="showPage('projects')" id="btn-projects">Projets</button>
+                <button onclick="showPage('interests')" id="btn-interests">Intérêts</button>
+                <button onclick="showPage('contact')" id="btn-contact">Contact</button>
             </div>
         </div>
     </nav>
 
     <main>
 
-        <section id="home" class="page-section">
+        <section id="home" class="page-section active">
             <div class="hero">
-                <h1>Alexandre LASTENNET--GUILLEMENOT</h1>
-                <h2>BUT GEII</h2>
-                <p>Bienvenue sur mon portfolio en ligne. Actuelment en deuxième année en GEII à l'IUT de Brest en parcours électronique et système embarqué</p>
-                <button class="btn-primary" onclick="showPage(&#39;projects&#39;)">Voir mes projets</button>
+                <h1>Alexandre LASTENNET-GUILLEMENOT</h1>
+                <h2>Étudiant BUT GEII</h2>
+                <p>Passionné par l'électronique, les systèmes embarqués et la programmation.</p>
+                <button class="btn-primary" onclick="showPage('projects')">Voir mes projets</button>
             </div>
             
             <div class="grid">
-                <div class="cv-block" style="text-align: center;">
-                    <h3>🚀 Mes services</h3>
-                    <p>Création de sites, Design, SEO</p>
+                <div class="module-card" style="text-align: center;">
+                    <h3>⚡ Compétences</h3>
+                    <p>Électronique, Systèmes embarqués</p>
                 </div>
-                <div class="cv-block" style="text-align: center;">
-                    <h3>💻 Technologies</h3>
-                    <p>HTML, CSS, JavaScript, React</p>
-                </div>
-                <div class="cv-block" style="text-align: center;">
-                    <h3>🌎 Localisation</h3>
-                    <p>Disponible à Paris ou en Remote</p>
+                <div class="module-card" style="text-align: center;">
+                    <h3>💻 Langages</h3>
+                    <p>C, C++, MicroPython, Python</p>
                 </div>
             </div>
         </section>
 
         <section id="cv" class="page-section">
-            <h2 style="margin-bottom: 20px;">Mon Parcours Académique</h2>
+            <h2 style="margin-bottom: 20px;">Mon Parcours</h2>
             
-            <div class="cv-block">
-                <div class="cv-header">
-                    <h3>GEII IUT de Brest</h3>
-                    <span class="cv-date">2024 - 2027</span>
+            <div class="module-card clickable-card" onclick="showPage('geii-details')">
+                <div class="module-header">
+                    <h3>BUT GEII - IUT de Brest</h3> <span class="module-date">2024 - 2027</span>
                 </div>
-                <p><strong>BUT GEII</strong></p>
-                <p>Description de tes missions. Ce que tu as accompli, les technologies utilisées et les résultats obtenus.</p>
+                <p><strong>Génie Électrique et Informatique Industrielle</strong></p>
+                <ul style="margin-left: 20px; margin-top: 10px; color: var(--text-grey);">
+                    <li>Parcours : Électronique et Systèmes Embarqués</li>
+                    <li>Apprentissage : Microcontrôleurs, FPGA, Automatisme</li>
+                </ul>
+                <p style="margin-top: 15px; font-size: 0.9rem; color: var(--primary);"><em>Cliquez pour voir les 4 compétences détaillées →</em></p>
             </div>
 
-            <div class="cv-block">
-                <div class="cv-header">
-                    <h3>Baccaloréat</h3>
-                    <span class="cv-date">2021 - 2024</span>
+            <div class="module-card">
+                <div class="module-header">
+                    <h3>Baccalauréat Général</h3> <span class="module-date">2021 - 2024</span>
                 </div>
                 <p><strong>Lycée de l'Élorn</strong></p>
-                <p>Bac générale avec les spécialité Mathématiques, Phisique &amp; Chimie et Science de l'Ingénieur et l'option Maths experte</p>
+                <p style="color: var(--text-grey);">Spécialités : Mathématiques, SI.</p>
             </div>
         </section>
 
-        <section id="projects" class="page-section active">
+        <section id="geii-details" class="page-section">
+            <button class="btn-back" onclick="showPage('cv')"><span>← Retour au CV</span></button>
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h2>Compétences & Apprentissages Critiques</h2>
+                <p style="color: var(--text-grey);">Cliquez sur un code (ex: AC11.01) pour voir la définition complète</p>
+            </div>
+            <div class="mindmap-container">
+                <div class="mm-center">BUT GEII (ESE)</div>
+                <div class="mm-branches">
+                    <div class="mm-branch branch-1"><div class="mm-branch-header">CONCEVOIR</div><ul class="mm-list"><li onclick="showAC('AC11.01')"><span>AC11.01</span> Analyse fonctionnelle</li><li onclick="showAC('AC11.02')"><span>AC11.02</span> Prototypage</li><li onclick="showAC('AC11.03')"><span>AC11.03</span> Dossier conception</li></ul></div>
+                    <div class="mm-branch branch-2"><div class="mm-branch-header">VÉRIFIER</div><ul class="mm-list"><li onclick="showAC('AC12.01')"><span>AC12.01</span> Procédure d'essais</li><li onclick="showAC('AC12.02')"><span>AC12.02</span> Diagnostic</li></ul></div>
+                    <div class="mm-branch branch-3"><div class="mm-branch-header">MAINTENIR</div><ul class="mm-list"><li onclick="showAC('AC13.01')"><span>AC13.01</span> Entretien système</li><li onclick="showAC('AC13.02')"><span>AC13.02</span> Maintenance</li></ul></div>
+                    <div class="mm-branch branch-4"><div class="mm-branch-header">IMPLANTER</div><ul class="mm-list"><li onclick="showAC('AC14.01')"><span>AC14.01</span> Fabrication</li><li onclick="showAC('AC14.02')"><span>AC14.02</span> Conformité</li></ul></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="page-section">
             <h2 style="margin-bottom: 20px;">Mes Réalisations</h2>
-            <div class="grid">
-                <article class="card">
-                    <div class="card-img">Image Projet 1</div>
-                    <div class="card-body">
-                        <h3>Site E-commerce</h3>
-                        <p>Création d'une boutique complète.</p>
-                        <br>
-                        <a href="file:///C:/Users/alexa/Downloads/online_viewer_net%20(1).htm#" style="color: var(--primary);">Voir le détail →</a>
+            <div class="grid" id="projects-grid-container"></div>
+        </section>
+
+        <section id="project-details-view" class="page-section">
+            <button class="btn-back" onclick="closeDetails('projects')"><span>← Retour aux projets</span></button>
+            <div class="module-card">
+                <div id="proj-placeholder" class="detail-header-img">Image du Projet</div>
+                <img id="proj-image" src="" alt="Projet" class="detail-header-img" style="display: none;">
+                <div class="detail-content">
+                    <h1 id="proj-title" style="margin-bottom: 10px;">Titre</h1>
+                    <div style="margin-bottom: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; color: var(--text-grey);">
+                        <span id="proj-year">Année</span> • <span id="proj-category">Catégorie</span>
                     </div>
-                </article>
-                <article class="card">
-                    <div class="card-img">Image Projet 2</div>
-                    <div class="card-body">
-                        <h3>Application Mobile</h3>
-                        <p>Design UX/UI pour une app de sport.</p>
-                        <br>
-                        <a href="file:///C:/Users/alexa/Downloads/online_viewer_net%20(1).htm#" style="color: var(--primary);">Voir le détail →</a>
-                    </div>
-                </article>
-                 <article class="card">
-                    <div class="card-img">Image Projet 3</div>
-                    <div class="card-body">
-                        <h3>Logo &amp; Branding</h3>
-                        <p>Identité visuelle pour une startup.</p>
-                        <br>
-                        <a href="file:///C:/Users/alexa/Downloads/online_viewer_net%20(1).htm#" style="color: var(--primary);">Voir le détail →</a>
-                    </div>
-                </article>
+                    <div style="margin-bottom: 20px;"><strong>Technologies : </strong><span id="proj-techs" style="color: var(--primary);">Techs</span></div>
+                    <div class="detail-desc"><p id="proj-description">Description...</p></div>
+                    <div style="margin-top: 30px;"><a id="proj-link" href="#" target="_blank" class="btn-primary" style="display: none;">Voir le lien</a></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="interests" class="page-section">
+            <h2 style="margin-bottom: 20px;">Passions & Intérêts</h2>
+            <div id="interests-grid-container"></div>
+        </section>
+
+        <section id="interest-details-view" class="page-section">
+            <button class="btn-back" onclick="closeDetails('interests')"><span>← Retour aux intérêts</span></button>
+            <div class="module-card">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <div id="int-big-icon" style="font-size: 4rem; margin-bottom: 10px;">🔭</div>
+                    <h1 id="int-title">Titre Intérêt</h1>
+                </div>
+                <div class="detail-desc"><p id="int-description">Description...</p></div>
+                <h3 style="margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 20px; margin-bottom:20px;">Galerie Photos</h3>
+                
+                <div id="int-gallery" class="gallery-centered"></div>
             </div>
         </section>
 
         <section id="contact" class="page-section">
-            <div class="contact-box">
+            <div class="module-card" style="text-align: center;">
                 <h2>Me Contacter</h2>
-                <p style="margin: 20px 0;">Je suis ouvert aux nouvelles opportunités. Discutons ensemble !</p>
-                
                 <div style="margin-bottom: 30px;">
-                    <p>📧 Email : <strong>mon.email@gmail.com</strong></p>
-                    <p>📱 Téléphone : <strong>06 00 00 00 00</strong></p>
+                    <p>📧 Email : <strong>lastennetguillemenot.a@gmail.com</strong></p>
+                    <p>🔗 LinkedIn : <a href="https://www.linkedin.com/in/alexandre-lastennet-guillemenot-577b46331" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 600;">Mon Profil</a></p>
                 </div>
-
-                <a href="mailto:mon.email@gmail.com" class="btn-primary">Envoyer un message</a>
+                <a href="mailto:lastennetguillemenot.a@gmail.com" class="btn-primary">Envoyer un email</a>
             </div>
         </section>
 
     </main>
 
-    <footer>
-        © 2024 Prénom Nom - Tous droits réservés.
-    </footer>
+    <div id="ac-modal" class="modal-overlay" onclick="closeACModal(event)">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeACModal(null)">×</button>
+            <h3 id="modal-title" class="modal-title">Titre AC</h3>
+            <p id="modal-desc" class="modal-text">Description...</p>
+        </div>
+    </div>
+
+    <footer>© 2026 Alexandre LASTENNET-GUILLEMENOT</footer>
 
     <script>
-        function showPage(pageId) {
-            // 1. Cacher toutes les sections
-            const sections = document.querySelectorAll('.page-section');
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
+        const acDetails = {
+            'AC11.01': "Produire une analyse fonctionnelle d'un système simple.",
+            'AC11.02': "Réaliser un prototype pour valider des solutions.",
+            'AC11.03': "Rédiger un dossier de fabrication.",
+            'AC12.01': "Appliquer une procédure d'essais.",
+            'AC12.02': "Identifier un dysfonctionnement par mesures.",
+            'AC13.01': "Exécuter l'entretien d'un système.",
+            'AC13.02': "Exécuter une opération de maintenance.",
+            'AC14.01': "Appliquer une procédure de fabrication.",
+            'AC14.02': "Évaluer la conformité du système."
+        };
 
-            // 2. Enlever la classe "active" de tous les boutons du menu
-            const buttons = document.querySelectorAll('.menu button');
-            buttons.forEach(btn => {
-                btn.classList.remove('active');
-            });
+        function showAC(acId) {
+            const desc = acDetails[acId] || "Détail non disponible.";
+            document.getElementById('modal-title').innerText = acId;
+            document.getElementById('modal-desc').innerText = desc;
+            const modal = document.getElementById('ac-modal');
+            modal.style.display = 'flex';
+            setTimeout(() => { modal.classList.add('open'); }, 10);
+        }
 
-            // 3. Afficher la section demandée
-            document.getElementById(pageId).classList.add('active');
-
-            // 4. Mettre en surbrillance le bouton cliqué (sauf si c'est le logo)
-            const activeBtn = document.getElementById('btn-' + pageId);
-            if(activeBtn) {
-                activeBtn.classList.add('active');
+        function closeACModal(event) {
+            if (!event || event.target.id === 'ac-modal' || event.target.classList.contains('modal-close')) {
+                const modal = document.getElementById('ac-modal');
+                modal.classList.remove('open');
+                setTimeout(() => { modal.style.display = 'none'; }, 300);
             }
+        }
 
-            // 5. Remonter en haut de page
-            window.scrollTo(0, 0);
+        const projectsData = [
+            {
+                id: 1,
+                title: "Robot Suiveur de Ligne",
+                shortDesc: "Robot autonome conçu en 1ère année.",
+                fullDesc: "Conception complète d'un robot capable de suivre une ligne noire sur fond blanc.",
+                year: "2025",
+                category: "Système Embarqué",
+                technologies: ["MicroPython", "PCB", "Électronique"],
+                image: "img/robot.jpg", 
+                link: ""
+            },
+            {
+                id: 2,
+                title: "Chargeur de téléphone",
+                shortDesc: "Analyse et maquette d'un chargeur.",
+                fullDesc: "Étude théorique et simulation LTSpice d'un convertisseur de puissance.",
+                year: "2024",
+                category: "Maquette électronique",
+                technologies: ["LTSpice", "Électronique de puissance"],
+                image: "img/chargeur.jpg", 
+                link: "https://drive.google.com/file/d/1VoNC0MHztoLNFAcYJgyiZ5qSFxyglYGq/view?usp=sharing"
+            },
+            {
+                id: 3,
+                title: "Thermostat d'ambiance",
+                shortDesc: "Régulation de température.",
+                fullDesc: "Système de régulation PID pour maintenir une température constante.",
+                year: "2024",
+                category: "Système Embarqué",
+                technologies: ["MicroPython", "Capteurs", "IHM"],
+                image: "img/thermostat.jpg", 
+                link: "#"
+            }
+        ];
+
+        const interestsData = [
+            {
+                id: 1,
+                title: "Astrophotographie",
+                icon: "🔭", 
+                shortDesc: "Capturer les objets du ciel profond.",
+                fullDesc: "L'astrophotographie demande de la patience et de la technique. Je capture des nébuleuses et des galaxies.",
+                galleryImages: [
+                    "photo_etoile_1.jpg", 
+                    "img/nebuleuse.jpg",
+                    "img/galaxie.jpg"
+                ]
+            },
+            {
+                id: 2,
+                title: "Photographie",
+                icon: "📷", 
+                shortDesc: "Paysages et macro-photographie.",
+                fullDesc: "La photographie me permet d'allier technique et sens artistique.",
+                galleryImages: [
+                    "img/paysage1.jpg", 
+                    "img/macro.jpg",
+                    "img/foret.jpg"
+                ]
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProjects(); 
+            renderInterests(); 
+            showPage('home');
+            document.getElementById('home').style.display = 'flex';
+        });
+
+        // --- PROJETS ---
+        function renderProjects() {
+            const container = document.getElementById('projects-grid-container');
+            container.innerHTML = '';
+            projectsData.forEach(p => {
+                let tags = p.technologies.map(t => `<span class="tag">${t}</span>`).join('');
+                let style = p.image ? `background-image: url('${p.image}');` : '';
+                container.innerHTML += `
+                    <article class="card" onclick="openProjectDetails(${p.id})">
+                        <div class="card-img" style="${style}">${p.image ? '' : 'Image'}</div>
+                        <div class="card-body"><h3>${p.title}</h3><p>${p.shortDesc}</p><div class="tags-container">${tags}</div></div>
+                    </article>`;
+            });
+        }
+
+        // --- INTÉRÊTS (VERSION GRILLE) ---
+        function renderInterests() {
+            const container = document.getElementById('interests-grid-container');
+            container.innerHTML = '';
+            interestsData.forEach(i => {
+                container.innerHTML += `
+                    <article class="card" onclick="openInterestDetails(${i.id})">
+                        <div class="card-icon-header">${i.icon}</div>
+                        <div class="card-body"><h3>${i.title}</h3><p>${i.shortDesc}</p><div style="margin-top:auto; color:var(--primary); font-size:0.8rem; font-weight:600;">Voir la galerie →</div></div>
+                    </article>`;
+            });
+        }
+
+        // --- DETAILS PROJET ---
+        function openProjectDetails(id) {
+            const p = projectsData.find(x => x.id === id);
+            if (!p) return;
+            document.getElementById('proj-title').innerText = p.title;
+            document.getElementById('proj-year').innerText = p.year;
+            document.getElementById('proj-category').innerText = p.category;
+            document.getElementById('proj-techs').innerText = p.technologies.join(', ');
+            document.getElementById('proj-description').innerText = p.fullDesc;
+            const img = document.getElementById('proj-image');
+            const ph = document.getElementById('proj-placeholder');
+            if(p.image){ img.src=p.image; img.style.display='block'; ph.style.display='none'; }
+            else{ img.style.display='none'; ph.style.display='flex'; }
+            const btn = document.getElementById('proj-link');
+            if(p.link) { btn.href=p.link; btn.style.display='inline-block'; } else btn.style.display='none';
+            showPage('project-details-view');
+        }
+
+        // --- DETAILS INTÉRÊT ---
+        function openInterestDetails(id) {
+            const i = interestsData.find(x => x.id === id);
+            if (!i) return;
+            document.getElementById('int-title').innerText = i.title;
+            document.getElementById('int-big-icon').innerText = i.icon;
+            document.getElementById('int-description').innerText = i.fullDesc;
+            const gal = document.getElementById('int-gallery'); gal.innerHTML = '';
+            i.galleryImages.forEach(src => { 
+                gal.innerHTML += `
+                <img src="${src}" class="gallery-item" alt="Photo galerie" 
+                onclick="window.open('${src}', '_blank')" 
+                onerror="this.style.display='none'">`; 
+            });
+            showPage('interest-details-view');
+        }
+
+        function closeDetails(target) { showPage(target); }
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(sec => { sec.classList.remove('active'); sec.style.display = 'none'; });
+            const target = document.getElementById(pageId);
+            if (target) {
+                target.classList.add('active');
+                target.style.display = (pageId === 'home') ? 'flex' : 'block';
+            }
+            document.querySelectorAll('.menu button').forEach(b => b.classList.remove('active'));
+            let mId = pageId;
+            if(pageId.includes('details')) mId = pageId.includes('project') ? 'projects' : (pageId.includes('geii') ? 'cv' : 'interests');
+            const btn = document.getElementById('btn-' + mId);
+            if(btn) btn.classList.add('active');
+            window.scrollTo(0,0);
         }
     </script>
-
-
-</body></html>
+</body>
+</html>
