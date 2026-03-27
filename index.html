@@ -18,11 +18,17 @@
             --white: #ffffff;
             --text-grey: #64748b;
             
-            /* COULEURS DES COMPÉTENCES GEII */
+            /* COULEURS DES BRANCHES GEII */
             --c-concevoir: #2563eb;   
             --c-verifier: #10b981;    
             --c-maintenir: #f59e0b;   
             --c-implanter: #8b5cf6;   
+
+            /* COULEURS DES NIVEAUX */
+            --niv-1: #4ade80; 
+            --niv-2: #60a5fa; 
+            --niv-3: #facc15; 
+            --niv-4: #f43f5e; 
         }
 
         /* --- BASE --- */
@@ -79,13 +85,28 @@
             background: var(--white); padding: 25px; border-radius: 12px; margin-bottom: 20px;
             border: 1px solid #e2e8f0; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
-        .module-header { display: flex; justify-content: space-between; margin-bottom: 8px; flex-wrap: wrap; }
-        .module-date { color: var(--primary); font-weight: 600; font-size: 0.9rem; }
+        
+        .module-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-start;
+            margin-bottom: 8px; 
+            flex-wrap: nowrap; 
+        }
+        
+        .module-header h3 { margin-right: 15px; }
+
+        .module-date { 
+            color: var(--primary); 
+            font-weight: 600; 
+            font-size: 0.9rem; 
+            text-align: right;
+            white-space: nowrap; 
+            flex-shrink: 0;
+        }
 
         .clickable-card { cursor: pointer; transition: all 0.3s ease; position: relative; }
         .clickable-card:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(37, 99, 235, 0.1); }
-        .clickable-card::after { content: "Voir le détail →"; position: absolute; bottom: 20px; right: 20px; font-size: 0.85rem; font-weight: bold; color: var(--primary); opacity: 0; transition: 0.3s; }
-        .clickable-card:hover::after { opacity: 1; }
 
         /* --- PAGE ACCUEIL --- */
         #home { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 80vh; }
@@ -93,7 +114,7 @@
         #home .grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 25px; width: 100%; }
         #home .module-card { width: 100%; max-width: 350px; }
 
-        /* --- CARTE PROJET (Vignette) --- */
+        /* --- CARTE PROJET --- */
         .card { background: var(--white); border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; transition: 0.3s; cursor: pointer; display: flex; flex-direction: column; height: 100%; }
         .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(37, 99, 235, 0.1); border-color: var(--primary); }
         
@@ -109,10 +130,11 @@
         }
         
         .card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+        .card-meta { font-size: 0.85rem; color: var(--text-grey); margin-bottom: 10px; display: flex; justify-content: space-between; }
         .tags-container { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
         .tag { background: #eff6ff; color: var(--primary); padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
 
-        /* --- CARTE INTÉRÊT (Style horizontal) --- */
+        /* --- CARTE INTÉRÊT --- */
         #interests-grid-container { display: flex; flex-direction: column; gap: 20px; }
         #interests-grid-container .card { flex-direction: row; min-height: 140px; align-items: stretch; }
         #interests-grid-container .card-icon-header { width: 140px; flex-shrink: 0; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); display: flex; align-items: center; justify-content: center; font-size: 3.5rem; border-right: 1px solid #e2e8f0; }
@@ -127,14 +149,23 @@
         .mm-branch { flex: 1; min-width: 200px; max-width: 240px; position: relative; background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); display: flex; flex-direction: column; }
         .mm-branch::before { content: ''; position: absolute; top: -20px; left: 50%; transform: translateX(-50%); width: 2px; height: 20px; background: #cbd5e1; }
         .mm-branch-header { font-size: 1rem; font-weight: 700; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid #f1f5f9; text-align: center; text-transform: uppercase; letter-spacing: 0.5px; }
+        
         .mm-list { list-style: none; padding: 0; font-size: 0.9rem; color: var(--text-grey); }
         .mm-list li { margin-bottom: 8px; padding: 8px 10px; border-radius: 6px; background: #f8fafc; cursor: pointer; transition: 0.2s; border: 1px solid transparent; display: flex; align-items: center; }
         .mm-list li:hover { background: #eff6ff; border-color: var(--primary); color: var(--primary); transform: translateX(3px); }
-        .mm-list li span { font-weight: 700; font-size: 0.75rem; margin-right: 10px; background: #e2e8f0; color: #475569; padding: 2px 6px; border-radius: 4px; }
-        .branch-1 .mm-branch-header { color: var(--c-concevoir); border-color: var(--c-concevoir); } .branch-1 .mm-list li:hover span { background: var(--c-concevoir); color: white; }
-        .branch-2 .mm-branch-header { color: var(--c-verifier); border-color: var(--c-verifier); } .branch-2 .mm-list li:hover span { background: var(--c-verifier); color: white; }
-        .branch-3 .mm-branch-header { color: var(--c-maintenir); border-color: var(--c-maintenir); } .branch-3 .mm-list li:hover span { background: var(--c-maintenir); color: white; }
-        .branch-4 .mm-branch-header { color: var(--c-implanter); border-color: var(--c-implanter); } .branch-4 .mm-list li:hover span { background: var(--c-implanter); color: white; }
+        .mm-list li span.code { font-weight: 700; font-size: 0.75rem; margin-right: 10px; background: #e2e8f0; color: #475569; padding: 2px 6px; border-radius: 4px; }
+
+        .dot { width: 10px; height: 10px; border-radius: 50%; margin-right: 10px; flex-shrink: 0; }
+        .bg-n1 { background-color: var(--niv-1); } .bg-n2 { background-color: var(--niv-2); } .bg-n3 { background-color: var(--niv-3); } .bg-n4 { background-color: var(--niv-4); }
+
+        .level-legend { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 30px; background: white; padding: 10px 20px; border-radius: 50px; border: 1px solid #e2e8f0; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        .legend-item { display: flex; align-items: center; font-size: 0.85rem; font-weight: 600; color: var(--text-grey); }
+        .legend-item .dot { margin-right: 6px; }
+
+        .branch-1 .mm-branch-header { color: var(--c-concevoir); border-color: var(--c-concevoir); } 
+        .branch-2 .mm-branch-header { color: var(--c-verifier); border-color: var(--c-verifier); } 
+        .branch-3 .mm-branch-header { color: var(--c-maintenir); border-color: var(--c-maintenir); } 
+        .branch-4 .mm-branch-header { color: var(--c-implanter); border-color: var(--c-implanter); } 
 
         /* --- MODAL --- */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 2000; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
@@ -145,59 +176,17 @@
         .modal-title { font-size: 1.2rem; margin-bottom: 10px; color: var(--primary); font-weight: bold; }
         .modal-text { font-size: 1rem; color: var(--text-grey); line-height: 1.6; }
 
-        /* --- DETAILS PROJET & INTERET --- */
+        /* --- DETAILS --- */
         .btn-back { background: white; border: 1px solid #cbd5e1; padding: 8px 16px; border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; font-weight: 600; color: var(--text-grey); transition: 0.2s; }
         .btn-back:hover { background: #f8fafc; color: var(--dark); border-color: var(--dark); }
         
-        /* === IMAGE EN-TÊTE DÉTAIL (MODIFIÉ POUR CENTRAGE) === */
-        .detail-header-img { 
-            display: block;             /* Se comporte comme un bloc */
-            margin: 0 auto 30px auto;   /* Marges auto à gauche/droite pour centrer */
-            
-            width: auto;                /* Largeur auto (respecte ratio) */
-            height: auto;               /* Hauteur auto */
-            max-width: 100%;            /* Ne dépasse pas la largeur du conteneur */
-            max-height: 600px;          /* Ne dépasse pas 600px de haut */
-            
-            background: #ffffff; 
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            object-fit: contain;        /* Assure que le contenu est visible */
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Petite ombre esthétique */
-        }
-        
-        /* Placeholder si pas d'image (texte centré) */
-        div.detail-header-img {
-            display: flex; align-items: center; justify-content: center;
-            height: 300px; width: 100%;
-            font-size: 1.5rem; color: #64748b;
-        }
-        
+        .detail-header-img { display: block; margin: 0 auto 30px auto; width: auto; height: auto; max-width: 100%; max-height: 600px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; object-fit: contain; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        div.detail-header-img { display: flex; align-items: center; justify-content: center; height: 300px; width: 100%; font-size: 1.5rem; color: #64748b; }
         .detail-desc { font-size: 1.1rem; color: var(--dark); white-space: pre-line; margin-bottom: 30px; }
         
-        /* === GALERIE CENTRÉE === */
-        .gallery-centered {
-            display: flex;
-            flex-wrap: wrap;        /* Retour à la ligne autorisé */
-            justify-content: center;/* Centre les éléments horizontalement */
-            gap: 20px;              /* Espace entre les photos */
-        }
-        
-        .gallery-item {
-            display: block;
-            width: auto;            /* La largeur s'adapte à l'image */
-            height: auto;           /* La hauteur s'adapte aussi */
-            max-width: 100%;        /* Pas plus large que l'écran */
-            max-height: 450px;      /* Hauteur max fixée pour uniformité */
-            
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-            transition: 0.3s;
-            background: #f1f5f9;
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        .gallery-item:hover { transform: scale(1.02); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        .gallery-masonry { column-count: 2; column-gap: 15px; }
+        .gallery-item { width: 100%; height: auto; margin-bottom: 15px; border-radius: 8px; border: 1px solid #e2e8f0; transition: 0.3s; background: #f1f5f9; cursor: pointer; display: block; }
+        .gallery-item:hover { transform: scale(1.02); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
         
         .hero { text-align: center; }
         .hero h1 { font-size: 2.8rem; margin-bottom: 15px; line-height: 1.2; }
@@ -207,16 +196,13 @@
         @media (max-width: 600px) {
             .hero h1 { font-size: 2rem; }
             .menu button { font-size: 0.8rem; margin-left: 2px; padding: 5px 6px; }
-            #interests-grid-container .card { flex-direction: column; }
-            #interests-grid-container .card-icon-header { width: 100%; height: 100px; border-right: none; border-bottom: 1px solid #e2e8f0; }
             .mm-branches { flex-direction: column; align-items: center; }
             .mm-branches::before { display: none; }
             .mm-branch { width: 100%; max-width: 100%; }
             .mm-branch::before { height: 40px; top: -40px; }
             .mm-center::after { height: 20px; bottom: -20px; }
-            
-            /* Mobile : Image moins haute */
             .detail-header-img { max-height: 400px; }
+            .gallery-masonry { column-count: 1; }
         }
     </style>
 </head>
@@ -241,59 +227,82 @@
             <div class="hero">
                 <h1>Alexandre LASTENNET-GUILLEMENOT</h1>
                 <h2>Étudiant BUT GEII</h2>
-                <p>Passionné par l'électronique, les systèmes embarqués et la programmation.</p>
+                <p>Étudiant en 2e année de BUT GEII, je recherche une alternance dans le domaine de l'électronique et de l'informatique industrielle.</p>
                 <button class="btn-primary" onclick="showPage('projects')">Voir mes projets</button>
             </div>
             
             <div class="grid">
-                <div class="module-card" style="text-align: center;">
+                <div class="module-card clickable-card" style="text-align: center;" onclick="showPage('geii-details')">
                     <h3>⚡ Compétences</h3>
                     <p>Électronique, Systèmes embarqués</p>
+                    <p style="margin-top: 15px; font-size: 0.8rem; color: var(--primary);"><em>Cliquez pour le détail</em></p>
                 </div>
+                
                 <div class="module-card" style="text-align: center;">
-                    <h3>💻 Langages</h3>
-                    <p>C, C++, MicroPython, Python</p>
+                    <h3>💻 Logiciels & Langages</h3>
+                    <p>C/C++, Python, Altium, LabVIEW, Fusion 360, SolidWorks, LTSpice</p>
                 </div>
             </div>
         </section>
 
         <section id="cv" class="page-section">
-            <h2 style="margin-bottom: 20px;">Mon Parcours</h2>
+            <h2 style="margin-bottom: 30px;">Mon Parcours</h2>
             
-            <div class="module-card clickable-card" onclick="showPage('geii-details')">
-                <div class="module-header">
-                    <h3>BUT GEII - IUT de Brest</h3> <span class="module-date">2024 - 2027</span>
-                </div>
-                <p><strong>Génie Électrique et Informatique Industrielle</strong></p>
-                <ul style="margin-left: 20px; margin-top: 10px; color: var(--text-grey);">
-                    <li>Parcours : Électronique et Systèmes Embarqués</li>
-                    <li>Apprentissage : Microcontrôleurs, FPGA, Automatisme</li>
-                </ul>
-                <p style="margin-top: 15px; font-size: 0.9rem; color: var(--primary);"><em>Cliquez pour voir les 4 compétences détaillées →</em></p>
-            </div>
+            <h3 style="margin-bottom: 20px; color: var(--primary); display:flex; align-items:center; gap:10px;">🎓 Formation</h3>
+            <div id="education-container"></div>
 
-            <div class="module-card">
-                <div class="module-header">
-                    <h3>Baccalauréat Général</h3> <span class="module-date">2021 - 2024</span>
-                </div>
-                <p><strong>Lycée de l'Élorn</strong></p>
-                <p style="color: var(--text-grey);">Spécialités : Mathématiques, SI.</p>
-            </div>
+            <hr style="margin: 40px 0; border: 0; border-top: 1px solid #e2e8f0;">
+
+            <h3 style="margin-bottom: 20px; color: var(--primary); display:flex; align-items:center; gap:10px;">💼 Expérience Professionnelle</h3>
+            <div id="experience-container"></div>
         </section>
 
         <section id="geii-details" class="page-section">
             <button class="btn-back" onclick="showPage('cv')"><span>← Retour au CV</span></button>
             <div style="text-align: center; margin-bottom: 30px;">
                 <h2>Compétences & Apprentissages Critiques</h2>
-                <p style="color: var(--text-grey);">Cliquez sur un code (ex: AC11.01) pour voir la définition complète</p>
+                <p style="color: var(--text-grey); margin-bottom: 20px;">Cliquez sur un code pour voir la définition</p>
+                
+                <div class="level-legend">
+                    <div class="legend-item"><span class="dot bg-n1"></span> Niveau 1</div>
+                    <div class="legend-item"><span class="dot bg-n2"></span> Niveau 2</div>
+                    <div class="legend-item"><span class="dot bg-n3"></span> Niveau 3</div>
+                    <div class="legend-item"><span class="dot bg-n4"></span> Niveau 4 (Expert)</div>
+                </div>
             </div>
+
             <div class="mindmap-container">
                 <div class="mm-center">BUT GEII (ESE)</div>
                 <div class="mm-branches">
-                    <div class="mm-branch branch-1"><div class="mm-branch-header">CONCEVOIR</div><ul class="mm-list"><li onclick="showAC('AC11.01')"><span>AC11.01</span> Analyse fonctionnelle</li><li onclick="showAC('AC11.02')"><span>AC11.02</span> Prototypage</li><li onclick="showAC('AC11.03')"><span>AC11.03</span> Dossier conception</li></ul></div>
-                    <div class="mm-branch branch-2"><div class="mm-branch-header">VÉRIFIER</div><ul class="mm-list"><li onclick="showAC('AC12.01')"><span>AC12.01</span> Procédure d'essais</li><li onclick="showAC('AC12.02')"><span>AC12.02</span> Diagnostic</li></ul></div>
-                    <div class="mm-branch branch-3"><div class="mm-branch-header">MAINTENIR</div><ul class="mm-list"><li onclick="showAC('AC13.01')"><span>AC13.01</span> Entretien système</li><li onclick="showAC('AC13.02')"><span>AC13.02</span> Maintenance</li></ul></div>
-                    <div class="mm-branch branch-4"><div class="mm-branch-header">IMPLANTER</div><ul class="mm-list"><li onclick="showAC('AC14.01')"><span>AC14.01</span> Fabrication</li><li onclick="showAC('AC14.02')"><span>AC14.02</span> Conformité</li></ul></div>
+                    <div class="mm-branch branch-1">
+                        <div class="mm-branch-header">CONCEVOIR</div>
+                        <ul class="mm-list">
+                            <li onclick="showAC('AC11.01')"><span class="dot bg-n1"></span><span class="code">AC11.01</span> Analyse</li>
+                            <li onclick="showAC('AC11.02')"><span class="dot bg-n2"></span><span class="code">AC11.02</span> Prototypage</li>
+                            <li onclick="showAC('AC11.03')"><span class="dot bg-n3"></span><span class="code">AC11.03</span> Dossier</li>
+                        </ul>
+                    </div>
+                    <div class="mm-branch branch-2">
+                        <div class="mm-branch-header">VÉRIFIER</div>
+                        <ul class="mm-list">
+                            <li onclick="showAC('AC12.01')"><span class="dot bg-n1"></span><span class="code">AC12.01</span> Essais</li>
+                            <li onclick="showAC('AC12.02')"><span class="dot bg-n2"></span><span class="code">AC12.02</span> Diagnostic</li>
+                        </ul>
+                    </div>
+                    <div class="mm-branch branch-3">
+                        <div class="mm-branch-header">MAINTENIR</div>
+                        <ul class="mm-list">
+                            <li onclick="showAC('AC13.01')"><span class="dot bg-n2"></span><span class="code">AC13.01</span> Entretien</li>
+                            <li onclick="showAC('AC13.02')"><span class="dot bg-n3"></span><span class="code">AC13.02</span> Maintenance</li>
+                        </ul>
+                    </div>
+                    <div class="mm-branch branch-4">
+                        <div class="mm-branch-header">IMPLANTER</div>
+                        <ul class="mm-list">
+                            <li onclick="showAC('AC14.01')"><span class="dot bg-n3"></span><span class="code">AC14.01</span> Fabrication</li>
+                            <li onclick="showAC('AC14.02')"><span class="dot bg-n4"></span><span class="code">AC14.02</span> Conformité</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
@@ -333,9 +342,8 @@
                     <h1 id="int-title">Titre Intérêt</h1>
                 </div>
                 <div class="detail-desc"><p id="int-description">Description...</p></div>
-                <h3 style="margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 20px; margin-bottom:20px;">Galerie Photos</h3>
-                
-                <div id="int-gallery" class="gallery-centered"></div>
+                <h3 style="margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 20px;">Galerie Photos</h3>
+                <div id="int-gallery" class="gallery-masonry"></div>
             </div>
         </section>
 
@@ -344,6 +352,7 @@
                 <h2>Me Contacter</h2>
                 <div style="margin-bottom: 30px;">
                     <p>📧 Email : <strong>lastennetguillemenot.a@gmail.com</strong></p>
+                    <p>📞 Téléphone : <strong>07 69 71 71 96</strong></p>
                     <p>🔗 LinkedIn : <a href="https://www.linkedin.com/in/alexandre-lastennet-guillemenot-577b46331" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 600;">Mon Profil</a></p>
                 </div>
                 <a href="mailto:lastennetguillemenot.a@gmail.com" class="btn-primary">Envoyer un email</a>
@@ -392,51 +401,133 @@
             }
         }
 
+        // ============================================
+        // 📚 DONNÉES DU CV (FORMATION & EXPÉRIENCE)
+        // ============================================
+
+        // 1. FORMATION (AJOUTER ICI)
+        const educationData = [
+            // {
+            //     title: "Nom du diplôme",
+            //     place: "Lieu / École",
+            //     dateDisplay: "Mois Année - Mois Année",
+            //     dateSort: "AAAA-MM-JJ", 
+            //     description: "Détails..."
+            // },
+            {
+                title: "BUT GEII",
+                place: "IUT de Brest",
+                dateDisplay: "Sept. 2024 - 2027",
+                dateSort: "2024-09-01",
+                description: "<ul style='margin-left:20px; color:#64748b;'><li>Génie Électrique et Informatique Industrielle</li><li>Parcours : Électronique et Systèmes Embarqués</li><li>Compétences : Conception/Maintenance PCB, C/C++/Python, Habilitations B0V/B1V</li></ul>",
+                isClickable: true, 
+                onclick: "showPage('geii-details')" 
+            },
+            {
+                title: "Baccalauréat Général",
+                place: "Lycée de l'Élorn (Landerneau)",
+                dateDisplay: "Sept. 2021 - Juin 2024",
+                dateSort: "2021-09-01",
+                description: "<p style='color:#64748b;'>Spécialités : Mathématiques, Physique-Chimie, Sciences de l'Ingénieur.</p>"
+            },
+            {
+                title: "Diplôme National du Brevet",
+                place: "Collège Saint Jean d'Arc (Crozon)",
+                dateDisplay: "2017 - 2021",
+                dateSort: "2017-09-01",
+                description: ""
+            }
+        ];
+
+        // 2. EXPÉRIENCE PROFESSIONNELLE (AJOUTER ICI)
+        const experienceData = [
+            // {
+            //     title: "Poste",
+            //     place: "Entreprise",
+            //     dateDisplay: "Mois Année",
+            //     dateSort: "AAAA-MM-JJ",
+            //     description: "Détails..."
+            // },
+            {
+                title: "Employé Polyvalent / Drive (Saisonnier)",
+                place: "SA CROZONDIS (E.LECLERC) - Crozon",
+                dateDisplay: "Juil. 2025 - Août 2025",
+                dateSort: "2025-07-01",
+                description: "Travail d'équipe, organisation, rapidité d'exécution."
+            },
+            {
+                title: "Stage (Optique & Audioprothèse)",
+                place: "Manéo Crozon",
+                dateDisplay: "Février 2022",
+                dateSort: "2022-02-01",
+                description: "Mise en rayon et observation du métier."
+            }
+        ];
+
+        // 3. PROJETS (AJOUTER ICI)
         const projectsData = [
             {
                 id: 1,
                 title: "Robot Suiveur de Ligne",
-                shortDesc: "Robot autonome conçu en 1ère année.",
-                fullDesc: "Conception complète d'un robot capable de suivre une ligne noire sur fond blanc.",
-                year: "2025",
-                category: "Système Embarqué",
-                technologies: ["MicroPython", "PCB", "Électronique"],
+                periode: "Janv. 2025 - Mars 2025",
+                dateTri: "2025-01-01",
+                category: "Projet Embarqué",
+                technologies: ["C/C++", "PCB", "STM32"],
+                shortDesc: "Participation au festival de robotique Cachan.",
+                fullDesc: "Conception complète d'un robot capable de suivre une ligne noire. Programmation en C sur STM32 et réalisation du PCB.",
                 image: "img/robot.jpg", 
                 link: ""
             },
             {
                 id: 2,
-                title: "Chargeur de téléphone",
-                shortDesc: "Analyse et maquette d'un chargeur.",
-                fullDesc: "Étude théorique et simulation LTSpice d'un convertisseur de puissance.",
-                year: "2024",
-                category: "Maquette électronique",
-                technologies: ["LTSpice", "Électronique de puissance"],
-                image: "img/chargeur.jpg", 
-                link: "https://drive.google.com/file/d/1VoNC0MHztoLNFAcYJgyiZ5qSFxyglYGq/view?usp=sharing"
+                title: "Antivol de casiers de pêche",
+                periode: "Sept. 2024 - Déc. 2024",
+                dateTri: "2024-09-01",
+                category: "Projet Académique",
+                technologies: ["Transmission DTMF", "Électronique"],
+                shortDesc: "Système de transmission DTMF.",
+                fullDesc: "Conception d'un système antivol pour casiers de pêche utilisant la transmission DTMF pour l'alerte.",
+                image: "img/antivol.jpg", 
+                link: ""
             },
             {
                 id: 3,
-                title: "Thermostat d'ambiance",
-                shortDesc: "Régulation de température.",
-                fullDesc: "Système de régulation PID pour maintenir une température constante.",
-                year: "2024",
-                category: "Système Embarqué",
-                technologies: ["MicroPython", "Capteurs", "IHM"],
+                title: "Thermostat électronique",
+                periode: "Janv. 2024 - Juin 2024",
+                dateTri: "2024-01-01",
+                category: "Projet Embarqué",
+                technologies: ["MicroPython", "Raspberry Pi Pico", "IHM"],
+                shortDesc: "Régulation de température sur Raspberry Pi Pico.",
+                fullDesc: "Système de régulation PID pour maintenir une température constante. Programmé en MicroPython sur Raspberry Pi Pico.",
                 image: "img/thermostat.jpg", 
                 link: "#"
             }
         ];
 
+        // 4. INTÉRÊTS (AJOUTER ICI)
         const interestsData = [
+            // --- MODELE A COPIER ---
+            /*
+            {
+                id: 99,
+                title: "Nom de l'intérêt",
+                icon: "🏅", // Emoji ou vide
+                shortDesc: "Description courte pour la carte.",
+                fullDesc: "Description complète. Tu peux utiliser <br> pour sauter des lignes.",
+                galleryImages: [
+                    "img/photo1.jpg",
+                    "img/photo2.jpg"
+                ]
+            },
+            */
             {
                 id: 1,
                 title: "Astrophotographie",
                 icon: "🔭", 
                 shortDesc: "Capturer les objets du ciel profond.",
-                fullDesc: "L'astrophotographie demande de la patience et de la technique. Je capture des nébuleuses et des galaxies.",
+                fullDesc: "L'astrophotographie demande de la patience et de la technique. Je capture des nébuleuses et des galaxies en utilisant des techniques de 'stacking' (empilement d'images) pour révéler les détails invisibles à l'œil nu.",
                 galleryImages: [
-                    "photo_etoile_1.JPG", 
+                    "photo_etoile_1.jpg", 
                     "img/nebuleuse.jpg",
                     "img/galaxie.jpg"
                 ]
@@ -446,38 +537,102 @@
                 title: "Photographie",
                 icon: "📷", 
                 shortDesc: "Paysages et macro-photographie.",
-                fullDesc: "La photographie me permet d'allier technique et sens artistique.",
+                fullDesc: "La photographie me permet d'allier technique (réglages ISO, ouverture, vitesse) et sens artistique. J'apprécie particulièrement la photographie de paysage.",
                 galleryImages: [
                     "img/paysage1.jpg", 
                     "img/macro.jpg",
                     "img/foret.jpg"
                 ]
+            },
+            {
+                id: 3,
+                title: "Sport",
+                icon: "🚴‍♂️", 
+                shortDesc: "Vélo et Natation.",
+                fullDesc: "Je pratique régulièrement le vélo et la natation. Ces sports m'aident à développer mon endurance et ma persévérance.",
+                galleryImages: [] 
+            },
+            {
+                id: 4,
+                title: "Échecs",
+                icon: "♟️", 
+                shortDesc: "Stratégie et réflexion.",
+                fullDesc: "Le jeu d'échecs développe ma capacité d'analyse et d'anticipation. J'apprécie la logique et la stratégie nécessaires pour chaque partie.",
+                galleryImages: [] 
             }
         ];
 
         document.addEventListener('DOMContentLoaded', () => {
+            renderCV(); 
             renderProjects(); 
             renderInterests(); 
             showPage('home');
             document.getElementById('home').style.display = 'flex';
         });
 
+        // --- GÉNÉRATION DU CV ---
+        function renderCV() {
+            educationData.sort((a, b) => new Date(b.dateSort) - new Date(a.dateSort));
+            experienceData.sort((a, b) => new Date(b.dateSort) - new Date(a.dateSort));
+
+            const eduContainer = document.getElementById('education-container');
+            eduContainer.innerHTML = '';
+            educationData.forEach(item => {
+                let clickableClass = item.isClickable ? 'clickable-card' : '';
+                let clickAttr = item.isClickable ? `onclick="${item.onclick}"` : '';
+                let detailHint = item.isClickable ? `<p style="margin-top: 15px; font-size: 0.9rem; color: var(--primary);"><em>Cliquez pour voir les compétences détaillées →</em></p>` : '';
+
+                eduContainer.innerHTML += `
+                <div class="module-card ${clickableClass}" ${clickAttr}>
+                    <div class="module-header">
+                        <h3>${item.title}</h3> <span class="module-date">${item.dateDisplay}</span>
+                    </div>
+                    <p><strong>${item.place}</strong></p>
+                    <div style="margin-top: 10px;">${item.description}</div>
+                    ${detailHint}
+                </div>`;
+            });
+
+            const expContainer = document.getElementById('experience-container');
+            expContainer.innerHTML = '';
+            experienceData.forEach(item => {
+                expContainer.innerHTML += `
+                <div class="module-card">
+                    <div class="module-header">
+                        <h3>${item.title}</h3> <span class="module-date">${item.dateDisplay}</span>
+                    </div>
+                    <p><strong>${item.place}</strong></p>
+                    <p style="margin-top: 10px; color: var(--text-grey);">${item.description}</p>
+                </div>`;
+            });
+        }
+
         // --- PROJETS ---
         function renderProjects() {
             const container = document.getElementById('projects-grid-container');
             container.innerHTML = '';
+
+            projectsData.sort((a, b) => new Date(b.dateTri) - new Date(a.dateTri));
+
             projectsData.forEach(p => {
                 let tags = p.technologies.map(t => `<span class="tag">${t}</span>`).join('');
                 let style = p.image ? `background-image: url('${p.image}');` : '';
                 container.innerHTML += `
                     <article class="card" onclick="openProjectDetails(${p.id})">
                         <div class="card-img" style="${style}">${p.image ? '' : 'Image'}</div>
-                        <div class="card-body"><h3>${p.title}</h3><p>${p.shortDesc}</p><div class="tags-container">${tags}</div></div>
+                        <div class="card-body">
+                            <div class="card-meta">
+                                <span>${p.category}</span>
+                                <span style="font-weight:600; color:var(--primary); white-space:nowrap;">${p.periode}</span>
+                            </div>
+                            <h3>${p.title}</h3>
+                            <p>${p.shortDesc}</p>
+                            <div class="tags-container">${tags}</div>
+                        </div>
                     </article>`;
             });
         }
 
-        // --- INTÉRÊTS (VERSION GRILLE) ---
         function renderInterests() {
             const container = document.getElementById('interests-grid-container');
             container.innerHTML = '';
@@ -490,12 +645,11 @@
             });
         }
 
-        // --- DETAILS PROJET ---
         function openProjectDetails(id) {
             const p = projectsData.find(x => x.id === id);
             if (!p) return;
             document.getElementById('proj-title').innerText = p.title;
-            document.getElementById('proj-year').innerText = p.year;
+            document.getElementById('proj-year').innerText = p.periode;
             document.getElementById('proj-category').innerText = p.category;
             document.getElementById('proj-techs').innerText = p.technologies.join(', ');
             document.getElementById('proj-description').innerText = p.fullDesc;
@@ -508,7 +662,6 @@
             showPage('project-details-view');
         }
 
-        // --- DETAILS INTÉRÊT ---
         function openInterestDetails(id) {
             const i = interestsData.find(x => x.id === id);
             if (!i) return;
