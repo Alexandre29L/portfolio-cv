@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Alexandre LASTENNET-GUILLEMENOT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==================================================================
+           ZONE CONFIGURATION
+           ================================================================== */
+        :root {
+            --primary: #2563eb;       
+            --primary-dark: #1e40af;
+            --dark: #0f172a;          
+            --light: #f1f5f9;         
+            --white: #ffffff;
+            --text-grey: #64748b;
+            
+            /* COULEURS DES BRANCHES GEII */
+            --c-concevoir: #2563eb;   
+            --c-verifier: #10b981;    
+            --c-maintenir: #f59e0b;   
+            --c-implanter: #8b5cf6;   
+
+            /* COULEURS DES NIVEAUX */
+            --niv-1: #4ade80; 
+            --niv-2: #60a5fa; 
+            --niv-3: #facc15; 
+            --niv-4: #f43f5e; 
+        }
+
+        /* --- BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            padding-top: 70px;
+            min-height: 100vh;
+            display: flex; flex-direction: column;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed; top: 0; width: 100%; background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px); border-bottom: 1px solid #e2e8f0; z-index: 1000; padding: 0 20px;
+        }
+        .nav-container {
+            max-width: 1000px; margin: 0 auto; height: 70px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-weight: 700; font-size: 1.2rem; cursor: pointer; color: var(--primary); }
+        
+        .menu button {
+            background: none; border: none; font-family: inherit; font-size: 1rem;
+            margin-left: 10px; cursor: pointer; color: var(--text-grey);
+            padding: 8px 12px; border-radius: 6px; transition: 0.3s;
+        }
+        .menu button:hover, .menu button.active {
+            background-color: #eff6ff; color: var(--primary); font-weight: 600;
+        }
+
+        /* --- CONTENU --- */
+        main { flex: 1; max-width: 1000px; width: 100%; margin: 0 auto; padding: 40px 20px; }
+        
+        .page-section { display: none; animation: fadeIn 0.4s ease-out; }
+        .page-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        h1, h2, h3 { color: var(--dark); }
+        .btn-primary {
+            background: var(--primary); color: white; padding: 12px 25px; border-radius: 50px;
+            text-decoration: none; font-weight: 600; border: none; cursor: pointer;
+            display: inline-block; transition: 0.3s;
+        }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+        /* --- ELEMENTS COMMUNS --- */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+
+        .module-card { 
+            background: var(--white); padding: 25px; border-radius: 12px; margin-bottom: 20px;
+            border: 1px solid #e2e8f0; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        
+        .module-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-start;
+            margin-bottom: 8px; 
+            flex-wrap: nowrap; 
+        }
+        
+        .module-header h3 { margin-right: 15px; }
+
+        .module-date { 
+            color: var(--primary); 
+            font-weight: 600; 
+            font-size: 0.9rem; 
+            text-align: right;
+            white-space: nowrap; 
+            flex-shrink: 0;
+        }
+
+        .clickable-card { cursor: pointer; transition: all 0.3s ease; position: relative; }
+        .clickable-card:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(37, 99, 235, 0.1); }
+
+        /* --- PAGE ACCUEIL --- */
+        #home { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 80vh; }
+        #home .hero { padding: 20px 0 40px 0; text-align: center; }
+        #home .grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 25px; width: 100%; }
+        #home .module-card { width: 100%; max-width: 350px; }
+
+        /* --- CARTE PROJET --- */
+        .card { background: var(--white); border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; transition: 0.3s; cursor: pointer; display: flex; flex-direction: column; height: 100%; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(37, 99, 235, 0.1); border-color: var(--primary); }
+        
+        .card-img { 
+            height: 220px; 
+            background-color: #f8fafc;
+            display: flex; align-items: center; justify-content: center; 
+            color: #64748b; font-weight: bold;
+            background-size: contain;       
+            background-position: center;    
+            background-repeat: no-repeat;   
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        .card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+        .card-meta { font-size: 0.85rem; color: var(--text-grey); margin-bottom: 10px; display: flex; justify-content: space-between; }
+        .tags-container { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+        .tag { background: #eff6ff; color: var(--primary); padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+
+        /* --- CARTE INTÉRÊT --- */
+        #interests-grid-container { display: flex; flex-direction: column; gap: 20px; }
+        #interests-grid-container .card { flex-direction: row; min-height: 140px; align-items: stretch; }
+        #interests-grid-container .card-icon-header { width: 140px; flex-shrink: 0; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); display: flex; align-items: center; justify-content: center; font-size: 3.5rem; border-right: 1px solid #e2e8f0; }
+        #interests-grid-container .card-body { justify-content: center; }
+
+        /* --- CARTE MENTALE --- */
+        .mindmap-container { display: flex; flex-direction: column; align-items: center; padding: 20px 0; }
+        .mm-center { background: var(--dark); color: white; padding: 15px 40px; border-radius: 50px; font-weight: bold; font-size: 1.2rem; margin-bottom: 40px; position: relative; box-shadow: 0 4px 15px rgba(15, 23, 42, 0.3); z-index: 2; }
+        .mm-center::after { content: ''; position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%); width: 2px; height: 40px; background: #cbd5e1; z-index: 1; }
+        .mm-branches { display: flex; justify-content: center; gap: 20px; width: 100%; flex-wrap: wrap; position: relative; }
+        .mm-branches::before { content: ''; position: absolute; top: -20px; left: 12%; right: 12%; height: 2px; background: #cbd5e1; z-index: 0; }
+        .mm-branch { flex: 1; min-width: 200px; max-width: 240px; position: relative; background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); display: flex; flex-direction: column; }
+        .mm-branch::before { content: ''; position: absolute; top: -20px; left: 50%; transform: translateX(-50%); width: 2px; height: 20px; background: #cbd5e1; }
+        .mm-branch-header { font-size: 1rem; font-weight: 700; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid #f1f5f9; text-align: center; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        .mm-list { list-style: none; padding: 0; font-size: 0.9rem; color: var(--text-grey); }
+        .mm-list li { margin-bottom: 8px; padding: 8px 10px; border-radius: 6px; background: #f8fafc; cursor: pointer; transition: 0.2s; border: 1px solid transparent; display: flex; align-items: center; }
+        .mm-list li:hover { background: #eff6ff; border-color: var(--primary); color: var(--primary); transform: translateX(3px); }
+        .mm-list li span.code { font-weight: 700; font-size: 0.75rem; margin-right: 10px; background: #e2e8f0; color: #475569; padding: 2px 6px; border-radius: 4px; }
+
+        .dot { width: 10px; height: 10px; border-radius: 50%; margin-right: 10px; flex-shrink: 0; }
+        .bg-n1 { background-color: var(--niv-1); } .bg-n2 { background-color: var(--niv-2); } .bg-n3 { background-color: var(--niv-3); } .bg-n4 { background-color: var(--niv-4); }
+
+        .level-legend { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 30px; background: white; padding: 10px 20px; border-radius: 50px; border: 1px solid #e2e8f0; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        .legend-item { display: flex; align-items: center; font-size: 0.85rem; font-weight: 600; color: var(--text-grey); }
+        .legend-item .dot { margin-right: 6px; }
+
+        .branch-1 .mm-branch-header { color: var(--c-concevoir); border-color: var(--c-concevoir); } 
+        .branch-2 .mm-branch-header { color: var(--c-verifier); border-color: var(--c-verifier); } 
+        .branch-3 .mm-branch-header { color: var(--c-maintenir); border-color: var(--c-maintenir); } 
+        .branch-4 .mm-branch-header { color: var(--c-implanter); border-color: var(--c-implanter); } 
+
+        /* --- MODAL --- */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 2000; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
+        .modal-overlay.open { display: flex; opacity: 1; }
+        .modal-content { background: white; width: 90%; max-width: 500px; padding: 30px; border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.2); position: relative; transform: translateY(20px); transition: transform 0.3s; }
+        .modal-overlay.open .modal-content { transform: translateY(0); }
+        .modal-close { position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #94a3b8; }
+        .modal-title { font-size: 1.2rem; margin-bottom: 10px; color: var(--primary); font-weight: bold; }
+        .modal-text { font-size: 1rem; color: var(--text-grey); line-height: 1.6; }
+
+        /* --- DETAILS --- */
+        .btn-back { background: white; border: 1px solid #cbd5e1; padding: 8px 16px; border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; font-weight: 600; color: var(--text-grey); transition: 0.2s; }
+        .btn-back:hover { background: #f8fafc; color: var(--dark); border-color: var(--dark); }
+        
+        .detail-header-img { display: block; margin: 0 auto 30px auto; width: auto; height: auto; max-width: 100%; max-height: 600px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; object-fit: contain; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        div.detail-header-img { display: flex; align-items: center; justify-content: center; height: 300px; width: 100%; font-size: 1.5rem; color: #64748b; }
+        .detail-desc { font-size: 1.1rem; color: var(--dark); white-space: pre-line; margin-bottom: 30px; }
+        
+        .gallery-masonry { column-count: 2; column-gap: 15px; }
+        .gallery-item { width: 100%; height: auto; margin-bottom: 15px; border-radius: 8px; border: 1px solid #e2e8f0; transition: 0.3s; background: #f1f5f9; cursor: pointer; display: block; }
+        .gallery-item:hover { transform: scale(1.02); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        
+        .hero { text-align: center; }
+        .hero h1 { font-size: 2.8rem; margin-bottom: 15px; line-height: 1.2; }
+        .hero h2 { font-size: 1.5rem; color: var(--primary); margin-bottom: 20px; font-weight: 400; }
+        footer { text-align: center; padding: 30px; color: var(--text-grey); font-size: 0.9rem; margin-top: 40px; border-top: 1px solid #e2e8f0; }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2rem; }
+            .menu button { font-size: 0.8rem; margin-left: 2px; padding: 5px 6px; }
+            .mm-branches { flex-direction: column; align-items: center; }
+            .mm-branches::before { display: none; }
+            .mm-branch { width: 100%; max-width: 100%; }
+            .mm-branch::before { height: 40px; top: -40px; }
+            .mm-center::after { height: 20px; bottom: -20px; }
+            .detail-header-img { max-height: 400px; }
+            .gallery-masonry { column-count: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo" onclick="showPage('home')">ALEXANDRE.LG</div>
+            <div class="menu">
+                <button onclick="showPage('home')" id="btn-home">Accueil</button>
+                <button onclick="showPage('cv')" id="btn-cv">CV</button>
+                <button onclick="showPage('projects')" id="btn-projects">Projets</button>
+                <button onclick="showPage('interests')" id="btn-interests">Intérêts</button>
+                <button onclick="showPage('contact')" id="btn-contact">Contact</button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+
+        <section id="home" class="page-section active">
+            <div class="hero">
+                <h1>Alexandre LASTENNET-GUILLEMENOT</h1>
+                <h2>Étudiant BUT GEII</h2>
+                <p>Étudiant en 2e année de BUT GEII, je recherche une alternance dans le domaine de l'électronique et de l'informatique industrielle.</p>
+                <button class="btn-primary" onclick="showPage('projects')">Voir mes projets</button>
+            </div>
+            
+            <div class="grid">
+                <div class="module-card clickable-card" style="text-align: center;" onclick="showPage('geii-details')">
+                    <h3>⚡ Compétences</h3>
+                    <p>Électronique, Systèmes embarqués</p>
+                    <p style="margin-top: 15px; font-size: 0.8rem; color: var(--primary);"><em>Cliquez pour le détail</em></p>
+                </div>
+                
+                <div class="module-card" style="text-align: center;">
+                    <h3>💻 Logiciels & Langages</h3>
+                    <p>C/C++, Python, Altium, LabVIEW, Fusion 360, SolidWorks, LTSpice</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="cv" class="page-section">
+            <h2 style="margin-bottom: 30px;">Mon Parcours</h2>
+            
+            <h3 style="margin-bottom: 20px; color: var(--primary); display:flex; align-items:center; gap:10px;">🎓 Formation</h3>
+            <div id="education-container"></div>
+
+            <hr style="margin: 40px 0; border: 0; border-top: 1px solid #e2e8f0;">
+
+            <h3 style="margin-bottom: 20px; color: var(--primary); display:flex; align-items:center; gap:10px;">💼 Expérience Professionnelle</h3>
+            <div id="experience-container"></div>
+        </section>
+
+        <section id="geii-details" class="page-section">
+            <button class="btn-back" onclick="showPage('cv')"><span>← Retour au CV</span></button>
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h2>Compétences & Apprentissages Critiques</h2>
+                <p style="color: var(--text-grey); margin-bottom: 20px;">Cliquez sur un code pour voir la définition</p>
+                
+                <div class="level-legend">
+                    <div class="legend-item"><span class="dot bg-n1"></span> Niveau 1</div>
+                    <div class="legend-item"><span class="dot bg-n2"></span> Niveau 2</div>
+                    <div class="legend-item"><span class="dot bg-n3"></span> Niveau 3</div>
+                    <div class="legend-item"><span class="dot bg-n4"></span> Niveau 4 (Expert)</div>
+                </div>
+            </div>
+
+            <div class="mindmap-container">
+                <div class="mm-center">BUT GEII (ESE)</div>
+                <div class="mm-branches">
+                    <div class="mm-branch branch-1">
+                        <div class="mm-branch-header">CONCEVOIR</div>
+                        <ul class="mm-list">
+                            <li onclick="showAC('AC11.01')"><span class="dot bg-n1"></span><span class="code">AC11.01</span> Analyse</li>
+                            <li onclick="showAC('AC11.02')"><span class="dot bg-n2"></span><span class="code">AC11.02</span> Prototypage</li>
+                            <li onclick="showAC('AC11.03')"><span class="dot bg-n3"></span><span class="code">AC11.03</span> Dossier</li>
+                        </ul>
+                    </div>
+                    <div class="mm-branch branch-2">
+                        <div class="mm-branch-header">VÉRIFIER</div>
+                        <ul class="mm-list">
+                            <li onclick="showAC('AC12.01')"><span class="dot bg-n1"></span><span class="code">AC12.01</span> Essais</li>
+                            <li onclick="showAC('AC12.02')"><span class="dot bg-n2"></span><span class="code">AC12.02</span> Diagnostic</li>
+                        </ul>
+                    </div>
+                    <div class="mm-branch branch-3">
+                        <div class="mm-branch-header">MAINTENIR</div>
+                        <ul class="mm-list">
+                            <li onclick="showAC('AC13.01')"><span class="dot bg-n2"></span><span class="code">AC13.01</span> Entretien</li>
+                            <li onclick="showAC('AC13.02')"><span class="dot bg-n3"></span><span class="code">AC13.02</span> Maintenance</li>
+                        </ul>
+                    </div>
+                    <div class="mm-branch branch-4">
+                        <div class="mm-branch-header">IMPLANTER</div>
+                        <ul class="mm-list">
+                            <li onclick="showAC('AC14.01')"><span class="dot bg-n3"></span><span class="code">AC14.01</span> Fabrication</li>
+                            <li onclick="showAC('AC14.02')"><span class="dot bg-n4"></span><span class="code">AC14.02</span> Conformité</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="page-section">
+            <h2 style="margin-bottom: 20px;">Mes Réalisations</h2>
+            <div class="grid" id="projects-grid-container"></div>
+        </section>
+
+        <section id="project-details-view" class="page-section">
+            <button class="btn-back" onclick="closeDetails('projects')"><span>← Retour aux projets</span></button>
+            <div class="module-card">
+                <div id="proj-placeholder" class="detail-header-img">Image du Projet</div>
+                <img id="proj-image" src="" alt="Projet" class="detail-header-img" style="display: none;">
+                <div class="detail-content">
+                    <h1 id="proj-title" style="margin-bottom: 10px;">Titre</h1>
+                    <div style="margin-bottom: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; color: var(--text-grey);">
+                        <span id="proj-year">Année</span> • <span id="proj-category">Catégorie</span>
+                    </div>
+                    <div style="margin-bottom: 20px;"><strong>Technologies : </strong><span id="proj-techs" style="color: var(--primary);">Techs</span></div>
+                    <div class="detail-desc"><p id="proj-description">Description...</p></div>
+                    <div style="margin-top: 30px;"><a id="proj-link" href="#" target="_blank" class="btn-primary" style="display: none;">Voir le lien</a></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="interests" class="page-section">
+            <h2 style="margin-bottom: 20px;">Passions & Intérêts</h2>
+            <div id="interests-grid-container"></div>
+        </section>
+
+        <section id="interest-details-view" class="page-section">
+            <button class="btn-back" onclick="closeDetails('interests')"><span>← Retour aux intérêts</span></button>
+            <div class="module-card">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <div id="int-big-icon" style="font-size: 4rem; margin-bottom: 10px;">🔭</div>
+                    <h1 id="int-title">Titre Intérêt</h1>
+                </div>
+                <div class="detail-desc"><p id="int-description">Description...</p></div>
+                <h3 style="margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 20px;">Galerie Photos</h3>
+                <div id="int-gallery" class="gallery-masonry"></div>
+            </div>
+        </section>
+
+        <section id="contact" class="page-section">
+            <div class="module-card" style="text-align: center;">
+                <h2>Me Contacter</h2>
+                <div style="margin-bottom: 30px;">
+                    <p>📧 Email : <strong>lastennetguillemenot.a@gmail.com</strong></p>
+                    <p>📞 Téléphone : <strong>07 69 71 71 96</strong></p>
+                    <p>🔗 LinkedIn : <a href="https://www.linkedin.com/in/alexandre-lastennet-guillemenot-577b46331" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 600;">Mon Profil</a></p>
+                </div>
+                <a href="mailto:lastennetguillemenot.a@gmail.com" class="btn-primary">Envoyer un email</a>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="ac-modal" class="modal-overlay" onclick="closeACModal(event)">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeACModal(null)">×</button>
+            <h3 id="modal-title" class="modal-title">Titre AC</h3>
+            <p id="modal-desc" class="modal-text">Description...</p>
+        </div>
+    </div>
+
+    <footer>© 2026 Alexandre LASTENNET-GUILLEMENOT</footer>
+
+    <script>
+        const acDetails = {
+            'AC11.01': "Produire une analyse fonctionnelle d'un système simple.",
+            'AC11.02': "Réaliser un prototype pour valider des solutions.",
+            'AC11.03': "Rédiger un dossier de fabrication.",
+            'AC12.01': "Appliquer une procédure d'essais.",
+            'AC12.02': "Identifier un dysfonctionnement par mesures.",
+            'AC13.01': "Exécuter l'entretien d'un système.",
+            'AC13.02': "Exécuter une opération de maintenance.",
+            'AC14.01': "Appliquer une procédure de fabrication.",
+            'AC14.02': "Évaluer la conformité du système."
+        };
+
+        function showAC(acId) {
+            const desc = acDetails[acId] || "Détail non disponible.";
+            document.getElementById('modal-title').innerText = acId;
+            document.getElementById('modal-desc').innerText = desc;
+            const modal = document.getElementById('ac-modal');
+            modal.style.display = 'flex';
+            setTimeout(() => { modal.classList.add('open'); }, 10);
+        }
+
+        function closeACModal(event) {
+            if (!event || event.target.id === 'ac-modal' || event.target.classList.contains('modal-close')) {
+                const modal = document.getElementById('ac-modal');
+                modal.classList.remove('open');
+                setTimeout(() => { modal.style.display = 'none'; }, 300);
+            }
+        }
+
+        // ============================================
+        // 📚 DONNÉES DU CV (FORMATION & EXPÉRIENCE)
+        // ============================================
+
+        // 1. FORMATION (AJOUTER ICI)
+        const educationData = [
+            // {
+            //     title: "Nom du diplôme",
+            //     place: "Lieu / École",
+            //     dateDisplay: "Mois Année - Mois Année",
+            //     dateSort: "AAAA-MM-JJ", 
+            //     description: "Détails..."
+            // },
+            {
+                title: "BUT GEII",
+                place: "IUT de Brest",
+                dateDisplay: "Sept. 2024 - 2027",
+                dateSort: "2024-09-01",
+                description: "<ul style='margin-left:20px; color:#64748b;'><li>Génie Électrique et Informatique Industrielle</li><li>Parcours : Électronique et Systèmes Embarqués</li><li>Compétences : Conception/Maintenance PCB, C/C++/Python, Habilitations B0V/B1V</li></ul>",
+                isClickable: true, 
+                onclick: "showPage('geii-details')" 
+            },
+            {
+                title: "Baccalauréat Général",
+                place: "Lycée de l'Élorn (Landerneau)",
+                dateDisplay: "Sept. 2021 - Juin 2024",
+                dateSort: "2021-09-01",
+                description: "<p style='color:#64748b;'>Spécialités : Mathématiques, Physique-Chimie, Sciences de l'Ingénieur.</p>"
+            },
+            {
+                title: "Diplôme National du Brevet",
+                place: "Collège Saint Jean d'Arc (Crozon)",
+                dateDisplay: "2017 - 2021",
+                dateSort: "2017-09-01",
+                description: ""
+            }
+        ];
+
+        // 2. EXPÉRIENCE PROFESSIONNELLE (AJOUTER ICI)
+        const experienceData = [
+            // {
+            //     title: "Poste",
+            //     place: "Entreprise",
+            //     dateDisplay: "Mois Année",
+            //     dateSort: "AAAA-MM-JJ",
+            //     description: "Détails..."
+            // },
+            {
+                title: "Employé Polyvalent / Drive (Saisonnier)",
+                place: "SA CROZONDIS (E.LECLERC) - Crozon",
+                dateDisplay: "Juil. 2025 - Août 2025",
+                dateSort: "2025-07-01",
+                description: "Travail d'équipe, organisation, rapidité d'exécution."
+            },
+            {
+                title: "Stage (Optique & Audioprothèse)",
+                place: "Manéo Crozon",
+                dateDisplay: "Février 2022",
+                dateSort: "2022-02-01",
+                description: "Mise en rayon et observation du métier."
+            }
+        ];
+
+        // 3. PROJETS (AJOUTER ICI)
+        const projectsData = [
+            {
+                id: 1,
+                title: "Robot Suiveur de Ligne",
+                periode: "Janv. 2025 - Mars 2025",
+                dateTri: "2025-01-01",
+                category: "Projet Embarqué",
+                technologies: ["C/C++", "PCB", "STM32"],
+                shortDesc: "Participation au festival de robotique Cachan.",
+                fullDesc: "Conception complète d'un robot capable de suivre une ligne noire. Programmation en C sur STM32 et réalisation du PCB.",
+                image: "img/robot.jpg", 
+                link: ""
+            },
+            {
+                id: 2,
+                title: "Antivol de casiers de pêche",
+                periode: "Sept. 2024 - Déc. 2024",
+                dateTri: "2024-09-01",
+                category: "Projet Académique",
+                technologies: ["Transmission DTMF", "Électronique"],
+                shortDesc: "Système de transmission DTMF.",
+                fullDesc: "Conception d'un système antivol pour casiers de pêche utilisant la transmission DTMF pour l'alerte.",
+                image: "img/antivol.jpg", 
+                link: ""
+            },
+            {
+                id: 3,
+                title: "Thermostat électronique",
+                periode: "Janv. 2024 - Juin 2024",
+                dateTri: "2024-01-01",
+                category: "Projet Embarqué",
+                technologies: ["MicroPython", "Raspberry Pi Pico", "IHM"],
+                shortDesc: "Régulation de température sur Raspberry Pi Pico.",
+                fullDesc: "Système de régulation PID pour maintenir une température constante. Programmé en MicroPython sur Raspberry Pi Pico.",
+                image: "img/thermostat.jpg", 
+                link: "#"
+            }
+        ];
+
+        // 4. INTÉRÊTS (AJOUTER ICI)
+        const interestsData = [
+            // --- MODELE A COPIER ---
+            /*
+            {
+                id: 99,
+                title: "Nom de l'intérêt",
+                icon: "🏅", // Emoji ou vide
+                shortDesc: "Description courte pour la carte.",
+                fullDesc: "Description complète. Tu peux utiliser <br> pour sauter des lignes.",
+                galleryImages: [
+                    "img/photo1.jpg",
+                    "img/photo2.jpg"
+                ]
+            },
+            */
+            {
+                id: 1,
+                title: "Astrophotographie",
+                icon: "🔭", 
+                shortDesc: "Capturer les objets du ciel profond.",
+                fullDesc: "L'astrophotographie demande de la patience et de la technique. Je capture des nébuleuses et des galaxies en utilisant des techniques de 'stacking' (empilement d'images) pour révéler les détails invisibles à l'œil nu.",
+                galleryImages: [
+                    "photo_etoile_1.jpg", 
+                    "img/nebuleuse.jpg",
+                    "img/galaxie.jpg"
+                ]
+            },
+            {
+                id: 2,
+                title: "Photographie",
+                icon: "📷", 
+                shortDesc: "Paysages et macro-photographie.",
+                fullDesc: "La photographie me permet d'allier technique (réglages ISO, ouverture, vitesse) et sens artistique. J'apprécie particulièrement la photographie de paysage.",
+                galleryImages: [
+                    "img/paysage1.jpg", 
+                    "img/macro.jpg",
+                    "img/foret.jpg"
+                ]
+            },
+            {
+                id: 3,
+                title: "Sport",
+                icon: "🚴‍♂️", 
+                shortDesc: "Vélo et Natation.",
+                fullDesc: "Je pratique régulièrement le vélo et la natation. Ces sports m'aident à développer mon endurance et ma persévérance.",
+                galleryImages: [] 
+            },
+            {
+                id: 4,
+                title: "Échecs",
+                icon: "♟️", 
+                shortDesc: "Stratégie et réflexion.",
+                fullDesc: "Le jeu d'échecs développe ma capacité d'analyse et d'anticipation. J'apprécie la logique et la stratégie nécessaires pour chaque partie.",
+                galleryImages: [] 
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCV(); 
+            renderProjects(); 
+            renderInterests(); 
+            showPage('home');
+            document.getElementById('home').style.display = 'flex';
+        });
+
+        // --- GÉNÉRATION DU CV ---
+        function renderCV() {
+            educationData.sort((a, b) => new Date(b.dateSort) - new Date(a.dateSort));
+            experienceData.sort((a, b) => new Date(b.dateSort) - new Date(a.dateSort));
+
+            const eduContainer = document.getElementById('education-container');
+            eduContainer.innerHTML = '';
+            educationData.forEach(item => {
+                let clickableClass = item.isClickable ? 'clickable-card' : '';
+                let clickAttr = item.isClickable ? `onclick="${item.onclick}"` : '';
+                let detailHint = item.isClickable ? `<p style="margin-top: 15px; font-size: 0.9rem; color: var(--primary);"><em>Cliquez pour voir les compétences détaillées →</em></p>` : '';
+
+                eduContainer.innerHTML += `
+                <div class="module-card ${clickableClass}" ${clickAttr}>
+                    <div class="module-header">
+                        <h3>${item.title}</h3> <span class="module-date">${item.dateDisplay}</span>
+                    </div>
+                    <p><strong>${item.place}</strong></p>
+                    <div style="margin-top: 10px;">${item.description}</div>
+                    ${detailHint}
+                </div>`;
+            });
+
+            const expContainer = document.getElementById('experience-container');
+            expContainer.innerHTML = '';
+            experienceData.forEach(item => {
+                expContainer.innerHTML += `
+                <div class="module-card">
+                    <div class="module-header">
+                        <h3>${item.title}</h3> <span class="module-date">${item.dateDisplay}</span>
+                    </div>
+                    <p><strong>${item.place}</strong></p>
+                    <p style="margin-top: 10px; color: var(--text-grey);">${item.description}</p>
+                </div>`;
+            });
+        }
+
+        // --- PROJETS ---
+        function renderProjects() {
+            const container = document.getElementById('projects-grid-container');
+            container.innerHTML = '';
+
+            projectsData.sort((a, b) => new Date(b.dateTri) - new Date(a.dateTri));
+
+            projectsData.forEach(p => {
+                let tags = p.technologies.map(t => `<span class="tag">${t}</span>`).join('');
+                let style = p.image ? `background-image: url('${p.image}');` : '';
+                container.innerHTML += `
+                    <article class="card" onclick="openProjectDetails(${p.id})">
+                        <div class="card-img" style="${style}">${p.image ? '' : 'Image'}</div>
+                        <div class="card-body">
+                            <div class="card-meta">
+                                <span>${p.category}</span>
+                                <span style="font-weight:600; color:var(--primary); white-space:nowrap;">${p.periode}</span>
+                            </div>
+                            <h3>${p.title}</h3>
+                            <p>${p.shortDesc}</p>
+                            <div class="tags-container">${tags}</div>
+                        </div>
+                    </article>`;
+            });
+        }
+
+        function renderInterests() {
+            const container = document.getElementById('interests-grid-container');
+            container.innerHTML = '';
+            interestsData.forEach(i => {
+                container.innerHTML += `
+                    <article class="card" onclick="openInterestDetails(${i.id})">
+                        <div class="card-icon-header">${i.icon}</div>
+                        <div class="card-body"><h3>${i.title}</h3><p>${i.shortDesc}</p><div style="margin-top:auto; color:var(--primary); font-size:0.8rem; font-weight:600;">Voir la galerie →</div></div>
+                    </article>`;
+            });
+        }
+
+        function openProjectDetails(id) {
+            const p = projectsData.find(x => x.id === id);
+            if (!p) return;
+            document.getElementById('proj-title').innerText = p.title;
+            document.getElementById('proj-year').innerText = p.periode;
+            document.getElementById('proj-category').innerText = p.category;
+            document.getElementById('proj-techs').innerText = p.technologies.join(', ');
+            document.getElementById('proj-description').innerText = p.fullDesc;
+            const img = document.getElementById('proj-image');
+            const ph = document.getElementById('proj-placeholder');
+            if(p.image){ img.src=p.image; img.style.display='block'; ph.style.display='none'; }
+            else{ img.style.display='none'; ph.style.display='flex'; }
+            const btn = document.getElementById('proj-link');
+            if(p.link) { btn.href=p.link; btn.style.display='inline-block'; } else btn.style.display='none';
+            showPage('project-details-view');
+        }
+
+        function openInterestDetails(id) {
+            const i = interestsData.find(x => x.id === id);
+            if (!i) return;
+            document.getElementById('int-title').innerText = i.title;
+            document.getElementById('int-big-icon').innerText = i.icon;
+            document.getElementById('int-description').innerText = i.fullDesc;
+            const gal = document.getElementById('int-gallery'); gal.innerHTML = '';
+            i.galleryImages.forEach(src => { 
+                gal.innerHTML += `
+                <img src="${src}" class="gallery-item" alt="Photo galerie" 
+                onclick="window.open('${src}', '_blank')" 
+                onerror="this.style.display='none'">`; 
+            });
+            showPage('interest-details-view');
+        }
+
+        function closeDetails(target) { showPage(target); }
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(sec => { sec.classList.remove('active'); sec.style.display = 'none'; });
+            const target = document.getElementById(pageId);
+            if (target) {
+                target.classList.add('active');
+                target.style.display = (pageId === 'home') ? 'flex' : 'block';
+            }
+            document.querySelectorAll('.menu button').forEach(b => b.classList.remove('active'));
+            let mId = pageId;
+            if(pageId.includes('details')) mId = pageId.includes('project') ? 'projects' : (pageId.includes('geii') ? 'cv' : 'interests');
+            const btn = document.getElementById('btn-' + mId);
+            if(btn) btn.classList.add('active');
+            window.scrollTo(0,0);
+        }
+    </script>
+</body>
+</html>
