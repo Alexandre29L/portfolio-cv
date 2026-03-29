@@ -146,11 +146,11 @@
         .mm-center::after { content: ''; position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%); width: 2px; height: 40px; background: #cbd5e1; z-index: 1; }
         .mm-branches { display: flex; justify-content: center; gap: 20px; width: 100%; flex-wrap: wrap; position: relative; }
         .mm-branches::before { content: ''; position: absolute; top: -20px; left: 12%; right: 12%; height: 2px; background: #cbd5e1; z-index: 0; }
-        .mm-branch { flex: 1; min-width: 200px; max-width: 240px; position: relative; background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); display: flex; flex-direction: column; }
+        .mm-branch { flex: 1; min-width: 250px; max-width: 300px; position: relative; background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); display: flex; flex-direction: column; }
         .mm-branch::before { content: ''; position: absolute; top: -20px; left: 50%; transform: translateX(-50%); width: 2px; height: 20px; background: #cbd5e1; }
         .mm-branch-header { font-size: 1rem; font-weight: 700; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid #f1f5f9; text-align: center; text-transform: uppercase; letter-spacing: 0.5px; }
         
-        .mm-list { list-style: none; padding: 0; font-size: 0.9rem; color: var(--text-grey); }
+        .mm-list { list-style: none; padding: 0; font-size: 0.85rem; color: var(--text-grey); }
         .mm-list li { margin-bottom: 8px; padding: 8px 10px; border-radius: 6px; background: #f8fafc; cursor: pointer; transition: 0.2s; border: 1px solid transparent; display: flex; align-items: center; }
         .mm-list li:hover { background: #eff6ff; border-color: var(--primary); color: var(--primary); transform: translateX(3px); }
         .mm-list li span.code { font-weight: 700; font-size: 0.75rem; margin-right: 10px; background: #e2e8f0; color: #475569; padding: 2px 6px; border-radius: 4px; }
@@ -167,15 +167,6 @@
         .branch-3 .mm-branch-header { color: var(--c-maintenir); border-color: var(--c-maintenir); } 
         .branch-4 .mm-branch-header { color: var(--c-implanter); border-color: var(--c-implanter); } 
 
-        /* --- MODAL --- */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 2000; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
-        .modal-overlay.open { display: flex; opacity: 1; }
-        .modal-content { background: white; width: 90%; max-width: 500px; padding: 30px; border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.2); position: relative; transform: translateY(20px); transition: transform 0.3s; }
-        .modal-overlay.open .modal-content { transform: translateY(0); }
-        .modal-close { position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #94a3b8; }
-        .modal-title { font-size: 1.2rem; margin-bottom: 10px; color: var(--primary); font-weight: bold; }
-        .modal-text { font-size: 1rem; color: var(--text-grey); line-height: 1.6; }
-
         /* --- DETAILS --- */
         .btn-back { background: white; border: 1px solid #cbd5e1; padding: 8px 16px; border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; font-weight: 600; color: var(--text-grey); transition: 0.2s; }
         .btn-back:hover { background: #f8fafc; color: var(--dark); border-color: var(--dark); }
@@ -184,10 +175,16 @@
         div.detail-header-img { display: flex; align-items: center; justify-content: center; height: 300px; width: 100%; font-size: 1.5rem; color: #64748b; }
         .detail-desc { font-size: 1.1rem; color: var(--dark); white-space: pre-line; margin-bottom: 30px; }
         
+        /* === GALERIES === */
         .gallery-masonry { column-count: 2; column-gap: 15px; }
         .gallery-item { width: 100%; height: auto; margin-bottom: 15px; border-radius: 8px; border: 1px solid #e2e8f0; transition: 0.3s; background: #f1f5f9; cursor: pointer; display: block; }
         .gallery-item:hover { transform: scale(1.02); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
         
+        .gallery-card { width: 100%; margin-bottom: 15px; border-radius: 8px; border: 1px solid #e2e8f0; transition: 0.3s; background: #ffffff; overflow: hidden; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .gallery-card:hover { transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.1); border-color: var(--primary); }
+        .gallery-card img { width: 100%; height: auto; display: block; cursor: pointer; border-bottom: 1px solid #f1f5f9; }
+        .gallery-caption { padding: 15px; font-size: 0.95rem; color: var(--dark); line-height: 1.5; }
+
         .hero { text-align: center; }
         .hero h1 { font-size: 2.8rem; margin-bottom: 15px; line-height: 1.2; }
         .hero h2 { font-size: 1.5rem; color: var(--primary); margin-bottom: 20px; font-weight: 400; }
@@ -226,21 +223,26 @@
         <section id="home" class="page-section active">
             <div class="hero">
                 <h1>Alexandre LASTENNET-GUILLEMENOT</h1>
-                <h2>Étudiant BUT GEII</h2>
-                <p>Étudiant en 2e année de BUT GEII, je recherche une alternance dans le domaine de l'électronique et de l'informatique industrielle.</p>
-                <button class="btn-primary" onclick="showPage('projects')">Voir mes projets</button>
+                <h2>Technicien & Développeur en Systèmes Embarqués</h2>
+                <p>Passionné par l'ingénierie électronique de pointe, je recherche une alternance pour mettre mon expertise technique et mon esprit d'innovation au service de défis industriels complexes.</p>
+                <button class="btn-primary" onclick="showPage('projects')">Découvrir mon expertise</button>
             </div>
             
             <div class="grid">
                 <div class="module-card clickable-card" style="text-align: center;" onclick="showPage('geii-details')">
                     <h3>⚡ Compétences</h3>
-                    <p>Électronique, Systèmes embarqués</p>
-                    <p style="margin-top: 15px; font-size: 0.8rem; color: var(--primary);"><em>Cliquez pour le détail</em></p>
+                    <p>Électronique, Conception PCB, Microcontrôleurs</p>
+                    <p style="margin-top: 15px; font-size: 0.8rem; color: var(--primary);"><em>Cliquez pour le détail de mon expertise</em></p>
                 </div>
                 
                 <div class="module-card" style="text-align: center;">
                     <h3>💻 Logiciels & Langages</h3>
-                    <p>C/C++, Python, Altium, LabVIEW, Fusion 360, SolidWorks, LTSpice</p>
+                    <p>C/C++, Python, Altium Designer, LabVIEW, Fusion 360, SolidWorks, LTSpice</p>
+                </div>
+
+                <div class="module-card" style="text-align: center;">
+                    <h3>🛠️ Instrumentation de pointe</h3>
+                    <p>Multimètre de précision, Oscilloscope numérique, Analyseur de réseau (VNA), GBF, Analyseur de puissance, Analyseur de spectre</p>
                 </div>
             </div>
         </section>
@@ -248,7 +250,7 @@
         <section id="cv" class="page-section">
             <h2 style="margin-bottom: 30px;">Mon Parcours</h2>
             
-            <h3 style="margin-bottom: 20px; color: var(--primary); display:flex; align-items:center; gap:10px;">🎓 Formation</h3>
+            <h3 style="margin-bottom: 20px; color: var(--primary); display:flex; align-items:center; gap:10px;">🎓 Formation d'Excellence</h3>
             <div id="education-container"></div>
 
             <hr style="margin: 40px 0; border: 0; border-top: 1px solid #e2e8f0;">
@@ -260,71 +262,99 @@
         <section id="geii-details" class="page-section">
             <button class="btn-back" onclick="showPage('cv')"><span>← Retour au CV</span></button>
             <div style="text-align: center; margin-bottom: 30px;">
-                <h2>Compétences & Apprentissages Critiques</h2>
-                <p style="color: var(--text-grey); margin-bottom: 20px;">Cliquez sur un code pour voir la définition</p>
+                <h2>Expertise Technique & Apprentissages Critiques</h2>
+                <p style="color: var(--text-grey); margin-bottom: 20px;">Cliquez sur une compétence pour accéder à mes preuves d'ingénierie détaillées.</p>
                 
                 <div class="level-legend">
-                    <div class="legend-item"><span class="dot bg-n1"></span> Niveau 1</div>
-                    <div class="legend-item"><span class="dot bg-n2"></span> Niveau 2</div>
-                    <div class="legend-item"><span class="dot bg-n3"></span> Niveau 3</div>
-                    <div class="legend-item"><span class="dot bg-n4"></span> Niveau 4 (Expert)</div>
+                    <div class="legend-item"><span class="dot bg-n1"></span> Niveau 1 (Maîtrise fondamentale)</div>
+                    <div class="legend-item"><span class="dot bg-n2"></span> Niveau 2 (Maîtrise avancée)</div>
                 </div>
             </div>
 
             <div class="mindmap-container">
-                <div class="mm-center">BUT GEII (ESE)</div>
+                <div class="mm-center">Mon Expertise GEII (ESE)</div>
                 <div class="mm-branches">
+                    
                     <div class="mm-branch branch-1">
                         <div class="mm-branch-header">CONCEVOIR</div>
                         <ul class="mm-list">
-                            <li onclick="showAC('AC11.01')"><span class="dot bg-n1"></span><span class="code">AC11.01</span> Analyse</li>
-                            <li onclick="showAC('AC11.02')"><span class="dot bg-n2"></span><span class="code">AC11.02</span> Prototypage</li>
-                            <li onclick="showAC('AC11.03')"><span class="dot bg-n3"></span><span class="code">AC11.03</span> Dossier</li>
+                            <li onclick="openACDetails('AC11.01')"><span class="dot bg-n1"></span><span class="code">AC11.01</span> Analyse fonctionnelle</li>
+                            <li onclick="openACDetails('AC11.02')"><span class="dot bg-n1"></span><span class="code">AC11.02</span> Prototypage avancé</li>
+                            <li onclick="openACDetails('AC11.03')"><span class="dot bg-n1"></span><span class="code">AC11.03</span> Dossier de fabrication</li>
+                            <li onclick="openACDetails('AC21.01')"><span class="dot bg-n2"></span><span class="code">AC21.01</span> Solutions techniques</li>
+                            <li onclick="openACDetails('AC21.02')"><span class="dot bg-n2"></span><span class="code">AC21.02</span> Dérisquage industriel</li>
                         </ul>
                     </div>
+                    
                     <div class="mm-branch branch-2">
                         <div class="mm-branch-header">VÉRIFIER</div>
                         <ul class="mm-list">
-                            <li onclick="showAC('AC12.01')"><span class="dot bg-n1"></span><span class="code">AC12.01</span> Essais</li>
-                            <li onclick="showAC('AC12.02')"><span class="dot bg-n2"></span><span class="code">AC12.02</span> Diagnostic</li>
+                            <li onclick="openACDetails('AC12.01')"><span class="dot bg-n1"></span><span class="code">AC12.01</span> Procédure d'essais</li>
+                            <li onclick="openACDetails('AC12.02')"><span class="dot bg-n1"></span><span class="code">AC12.02</span> Identification dysfonct.</li>
+                            <li onclick="openACDetails('AC12.03')"><span class="dot bg-n1"></span><span class="code">AC12.03</span> Analyse des impacts</li>
+                            <li onclick="openACDetails('AC22.01')"><span class="dot bg-n2"></span><span class="code">AC22.01</span> Instrumentation experte</li>
+                            <li onclick="openACDetails('AC22.02')"><span class="dot bg-n2"></span><span class="code">AC22.02</span> Certification matérielle</li>
                         </ul>
                     </div>
+                    
                     <div class="mm-branch branch-3">
                         <div class="mm-branch-header">MAINTENIR</div>
                         <ul class="mm-list">
-                            <li onclick="showAC('AC13.01')"><span class="dot bg-n2"></span><span class="code">AC13.01</span> Entretien</li>
-                            <li onclick="showAC('AC13.02')"><span class="dot bg-n3"></span><span class="code">AC13.02</span> Maintenance</li>
+                            <li onclick="openACDetails('AC13.01')"><span class="dot bg-n1"></span><span class="code">AC13.01</span> Maintien opérationnel</li>
+                            <li onclick="openACDetails('AC13.02')"><span class="dot bg-n1"></span><span class="code">AC13.02</span> Interventions complexes</li>
+                            <li onclick="openACDetails('AC13.03')"><span class="dot bg-n1"></span><span class="code">AC13.03</span> Diagnostic infaillible</li>
+                            <li onclick="openACDetails('AC23.01')"><span class="dot bg-n2"></span><span class="code">AC23.01</span> Analyse cause racine</li>
                         </ul>
                     </div>
+                    
                     <div class="mm-branch branch-4">
                         <div class="mm-branch-header">IMPLANTER</div>
                         <ul class="mm-list">
-                            <li onclick="showAC('AC14.01')"><span class="dot bg-n3"></span><span class="code">AC14.01</span> Fabrication</li>
-                            <li onclick="showAC('AC14.02')"><span class="dot bg-n4"></span><span class="code">AC14.02</span> Conformité</li>
+                            <li onclick="openACDetails('AC14.01')"><span class="dot bg-n1"></span><span class="code">AC14.01</span> Qualité d'assemblage</li>
+                            <li onclick="openACDetails('AC14.02')"><span class="dot bg-n1"></span><span class="code">AC14.02</span> Validation conformité</li>
+                            <li onclick="openACDetails('AC24.01')"><span class="dot bg-n2"></span><span class="code">AC24.01</span> Déploiement système</li>
+                            <li onclick="openACDetails('AC24.02')"><span class="dot bg-n2"></span><span class="code">AC24.02</span> Mise en service</li>
+                            <li onclick="openACDetails('AC24.03')"><span class="dot bg-n2"></span><span class="code">AC24.03</span> Traçabilité & Versionnage</li>
                         </ul>
                     </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        <section id="ac-details-view" class="page-section">
+            <button class="btn-back" onclick="showPage('geii-details')"><span>← Retour à mon expertise</span></button>
+            <div class="module-card">
+                <div id="ac-placeholder" class="detail-header-img">Aperçu technique</div>
+                <img id="ac-image" src="" alt="Illustration AC" class="detail-header-img" style="display: none;">
+                <div class="detail-content">
+                    <h1 id="ac-title" style="margin-bottom: 20px; color: var(--primary);">Titre AC</h1>
+                    <div class="detail-desc"><p id="ac-description">Description complète de l'AC...</p></div>
+                    
+                    <h3 style="margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 20px; margin-bottom: 20px;">Dossier de Preuves</h3>
+                    <div id="ac-gallery" class="gallery-masonry"></div>
                 </div>
             </div>
         </section>
 
         <section id="projects" class="page-section">
-            <h2 style="margin-bottom: 20px;">Mes Réalisations</h2>
+            <h2 style="margin-bottom: 20px;">Réalisations Industrielles & Académiques</h2>
             <div class="grid" id="projects-grid-container"></div>
         </section>
 
         <section id="project-details-view" class="page-section">
             <button class="btn-back" onclick="closeDetails('projects')"><span>← Retour aux projets</span></button>
             <div class="module-card">
-                <div id="proj-placeholder" class="detail-header-img">Image du Projet</div>
+                <div id="proj-placeholder" class="detail-header-img">Aperçu du système</div>
                 <img id="proj-image" src="" alt="Projet" class="detail-header-img" style="display: none;">
                 <div class="detail-content">
                     <h1 id="proj-title" style="margin-bottom: 10px;">Titre</h1>
                     <div style="margin-bottom: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; color: var(--text-grey);">
                         <span id="proj-year">Année</span> • <span id="proj-category">Catégorie</span>
                     </div>
-                    <div style="margin-bottom: 20px;"><strong>Technologies : </strong><span id="proj-techs" style="color: var(--primary);">Techs</span></div>
+                    <div style="margin-bottom: 20px;"><strong>Stack Technologique : </strong><span id="proj-techs" style="color: var(--primary);">Techs</span></div>
                     <div class="detail-desc"><p id="proj-description">Description...</p></div>
-                    <div style="margin-top: 30px;"><a id="proj-link" href="#" target="_blank" class="btn-primary" style="display: none;">Voir le lien</a></div>
+                    <div style="margin-top: 30px;"><a id="proj-link" href="#" target="_blank" class="btn-primary" style="display: none;">Voir la documentation technique</a></div>
                 </div>
             </div>
         </section>
@@ -349,183 +379,309 @@
 
         <section id="contact" class="page-section">
             <div class="module-card" style="text-align: center;">
-                <h2>Me Contacter</h2>
+                <h2>Collaborons ensemble</h2>
                 <div style="margin-bottom: 30px;">
+                    <p style="margin-bottom: 10px;">Mon profil technique correspond à vos enjeux ? N'hésitez pas à me contacter.</p>
                     <p>📧 Email : <strong>lastennetguillemenot.a@gmail.com</strong></p>
-                    <p>📞 Téléphone : <strong>07 69 71 71 96</strong></p>
-                    <p>🔗 LinkedIn : <a href="https://www.linkedin.com/in/alexandre-lastennet-guillemenot-577b46331" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 600;">Mon Profil</a></p>
+                    <p>🔗 LinkedIn : <a href="https://www.linkedin.com/in/alexandre-lastennet-guillemenot-577b46331" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 600;">Mon Profil Professionnel</a></p>
                 </div>
-                <a href="mailto:lastennetguillemenot.a@gmail.com" class="btn-primary">Envoyer un email</a>
+                <a href="mailto:lastennetguillemenot.a@gmail.com" class="btn-primary">Me contacter par email</a>
             </div>
         </section>
 
     </main>
 
-    <div id="ac-modal" class="modal-overlay" onclick="closeACModal(event)">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeACModal(null)">×</button>
-            <h3 id="modal-title" class="modal-title">Titre AC</h3>
-            <p id="modal-desc" class="modal-text">Description...</p>
-        </div>
-    </div>
-
     <footer>© 2026 Alexandre LASTENNET-GUILLEMENOT</footer>
 
     <script>
-        const acDetails = {
-            'AC11.01': "Produire une analyse fonctionnelle d'un système simple.",
-            'AC11.02': "Réaliser un prototype pour valider des solutions.",
-            'AC11.03': "Rédiger un dossier de fabrication.",
-            'AC12.01': "Appliquer une procédure d'essais.",
-            'AC12.02': "Identifier un dysfonctionnement par mesures.",
-            'AC13.01': "Exécuter l'entretien d'un système.",
-            'AC13.02': "Exécuter une opération de maintenance.",
-            'AC14.01': "Appliquer une procédure de fabrication.",
-            'AC14.02': "Évaluer la conformité du système."
-        };
+        // ========================================================================================
+        // 📚 EXPERTISE & APPRENTISSAGES CRITIQUES (AC) - TEXTES RÉVISÉS
+        // ========================================================================================
+        // Remplace les "img/placeholder.jpg" par tes véritables images.
+        // ========================================================================================
 
-        function showAC(acId) {
-            const desc = acDetails[acId] || "Détail non disponible.";
-            document.getElementById('modal-title').innerText = acId;
-            document.getElementById('modal-desc').innerText = desc;
-            const modal = document.getElementById('ac-modal');
-            modal.style.display = 'flex';
-            setTimeout(() => { modal.classList.add('open'); }, 10);
-        }
+        const acData = {
+            // --- CONCEVOIR NIVEAU 1 ---
+            'AC11.01': {
+                title: "Maîtrise de l'Analyse Fonctionnelle",
+                fullDesc: "L'analyse fonctionnelle (Bête à cornes, Pieuvre, SADT) est la fondation de toute ingénierie d'excellence. Je ne me contente pas de lire un cahier des charges : je le décortique, je l'optimise et j'anticipe les contraintes industrielles et d'utilisation.<br><br>Dans le cadre de l'ingénierie de l'antivol de casiers de pêche, j'ai modélisé avec une grande rigueur l'architecture globale, garantissant une base technique infaillible pour la suite du développement et répondant précisément au besoin client.",
+                heroImage: "", 
+                galleryImages: [
+                    { src: "img/schema_piezo_1.jpg", caption: "<strong>Diagrammes avancés :</strong> Identification précise des interactions matérielles et logicielles pour le projet Robot Suiveur." },
+                    { src: "img/placeholder.jpg", caption: "<strong>Cahier des charges optimisé :</strong> Rédaction rigoureuse incluant les contraintes d'alimentation et thermiques." }
+                ]
+            },
+            'AC11.02': {
+                title: "Prototypage Matériel & Logiciel",
+                fullDesc: "Le prototypage est l'étape où mon expertise théorique prend vie. Je conçois des prototypes robustes et méthodiques pour valider chaque bloc fonctionnel de manière unitaire avant l'assemblage final.<br><br>Sur l'antivol de casiers, j'ai pris l'initiative d'optimiser la révision matérielle 2022 en y intégrant des points de test stratégiques. Mon aisance sur Altium Designer m'a ensuite permis de réaliser un routage PCB d'une grande précision, couplé à un développement embarqué optimisé en MicroPython.",
+                heroImage: "",
+                galleryImages: [
+                    { src: "img/placeholder.jpg", caption: "<strong>Étape de validation :</strong> Intégration sur breadboard et simulation LTSpice en amont de la conception PCB." },
+                    { src: "img/placeholder.jpg", caption: "<strong>Routage PCB professionnel :</strong> Carte électronique conçue de A à Z sous Altium." }
+                ]
+            },
+            'AC11.03': {
+                title: "Production de Dossiers de Fabrication",
+                fullDesc: "Un excellent ingénieur se distingue par la qualité de sa documentation technique. Je produis des dossiers de fabrication exhaustifs, normés et directement exploitables par l'industrie.<br><br>Mes schémas électriques sous Altium, mes fichiers Gerber et mes nomenclatures (BOM) sont d'une précision chirurgicale. Le dossier de fabrication du robot suiveur de ligne en est la preuve formelle : aucun détail de routage ou de composant n'a été laissé au hasard.",
+                heroImage: "",
+                galleryImages: [
+                    { src: "img/placeholder.jpg", caption: "<strong>Documentation industrielle :</strong> Extrait de mes dossiers de fabrication prêts pour l'assemblage." },
+                    { src: "img/placeholder.jpg", caption: "<strong>Dossier de conception :</strong> Explicitation des choix architecturaux." }
+                ]
+            },
+            
+            // --- CONCEVOIR NIVEAU 2 ---
+            'AC21.01': {
+                title: "Conception de Solutions Techniques Inédites",
+                fullDesc: "Face à un obstacle technique, je trouve et j'implémente la meilleure solution. Je ne subis pas les limites du matériel, je les surmonte.<br><br>Lors de la phase de test de l'antivol, j'ai diagnostiqué l'inefficacité du microphone d'origine. J'ai pris la décision d'intégrer un capteur piézoélectrique. Pour cela, j'ai conçu sur-mesure une carte d'adaptation d'impédance ultra-basse consommation (mono-tension, tirant seulement quelques µA/nA), prouvant ma capacité à résoudre des problèmes d'acquisition de signaux complexes.",
+                heroImage: "",
+                galleryImages: [
+                    { src: "img/placeholder.jpg", caption: "<strong>Ingénierie sur-mesure :</strong> Schéma de la carte secondaire d'adaptation d'impédance conçue pour le capteur piézo." },
+                    { src: "img/placeholder.jpg", caption: "<strong>Code embarqué :</strong> Algorithme d'acquisition optimisé pour ce nouveau capteur." }
+                ]
+            },
+            'AC21.02': {
+                title: "Dérisquage et Validation Structurelle",
+                fullDesc: "L'anticipation des risques est au cœur de mon processus d'ingénierie. Je cartographie méthodiquement chaque faille potentielle (thermique, électrique, logicielle, environnementale) et j'intègre les correctifs en amont.<br><br>Ma capacité à concevoir des systèmes hautement fiables repose sur des choix de composants éclairés et une réponse parfaite aux contraintes normatives et d'usage, garantissant la viabilité d'un produit en milieu industriel.",
+                heroImage: "",
+                galleryImages: [
+                    { src: "img/placeholder.jpg", caption: "<strong>Matrice des risques :</strong> Analyse fonctionnelle orientée fiabilité système." },
+                    { src: "img/placeholder.jpg", caption: "<strong>Validation normative :</strong> Étude de la tolérance du système face aux contraintes du cahier des charges." }
+                ]
+            },
 
-        function closeACModal(event) {
-            if (!event || event.target.id === 'ac-modal' || event.target.classList.contains('modal-close')) {
-                const modal = document.getElementById('ac-modal');
-                modal.classList.remove('open');
-                setTimeout(() => { modal.style.display = 'none'; }, 300);
+            // --- VÉRIFIER NIVEAU 1 ---
+            'AC12.01': {
+                title: "Exécution Stricte de Procédures d'Essais",
+                fullDesc: "La validation d'un système ne laisse aucune place à l'improvisation. J'applique et j'exécute des procédures d'essais d'une rigueur absolue pour vérifier chaque paramètre électrique.<br><br>Mes interventions lors des sessions pratiques, notamment à l'Ifremer, ont démontré ma capacité à évoluer dans des environnements de haute exigence. J'y ai validé avec exactitude des câblages et des systèmes de communication acoustique sous-marine complexes.",
+                heroImage: "",
+                galleryImages: [
+                    { src: "img/placeholder.jpg", caption: "<strong>Intervention Ifremer :</strong> Vérification minutieuse des câblages sur les équipements sous-marins." },
+                    { src: "img/placeholder.jpg", caption: "<strong>Test Prototype :</strong> Rapport d'essais rigoureux menés sur la révision 2022 de l'antivol." }
+                ]
+            },
+            'AC12.02': {
+                title: "Diagnostic Précis et Identification de Dysfonctionnements",
+                fullDesc: "Mon esprit d'analyse me permet de traquer les pannes matérielles les plus subtiles. Face à une carte défaillante, je déploie une méthodologie de diagnostic implacable en comparant les schémas théoriques aux signaux réels.<br><br>Sur le prototype 2022, face à l'inactivité de la LED D4, je n'ai pas tâtonné : j'ai isolé la section, mesuré les signaux et identifié instantanément que la résistance de limitation de courant était en cause, et non le composant actif.",
+                heroImage: "",
+                galleryImages: [
+                    { src: "img/placeholder.jpg", caption: "<strong>Investigation PCB :</strong> Isolation et localisation de la panne sur la résistance associée à la LED D4." },
+                    { src: "img/placeholder.jpg", caption: "<strong>Rapports d'expertise :</strong> Extraits de mes analyses de défaillances matérielles." }
+                ]
+            },
+            'AC12.03': {
+                title: "Analyse Stratégique des Impacts de Défaillance",
+                fullDesc: "Je ne me contente pas de trouver la panne, j'en maîtrise les conséquences absolues. Je traduis l'anomalie d'un composant en impacts concrets sur l'ensemble de l'architecture logicielle et matérielle.<br><br>Cette vision systémique me permet d'évaluer avec précision les risques sécuritaires et de fonctionnement, fournissant ainsi des rapports d'ingénierie clairs pour l'équipe projet.",
+                heroImage: "",
+                galleryImages: [
+                    { src: "img/placeholder.jpg", caption: "<strong>Documentation d'impact :</strong> Rapport détaillant comment la défaillance de la résistance altérait la supervision du système." }
+                ]
+            },
+
+            // --- VÉRIFIER NIVEAU 2 ---
+            'AC22.01': {
+                title: "Création de Protocoles de Tests & Instrumentation",
+                fullDesc: "La maîtrise de l'instrumentation de laboratoire (oscilloscopes haute fréquence, analyseurs de spectre) est mon domaine d'expertise. Je crée moi-même les procédures de test pour valider des fonctionnements complexes.<br><br>Pour la SAÉ, j'ai défini des protocoles de tests complets pour caractériser le décodage DTMF avec la puce MT88L70. L'analyse critique du prototype précédent m'a permis de générer des scénarios de tests robustes et d'accélérer drastiquement le développement final.",
+                heroImage: "",
+                galleryImages: [
+                    { src: "img/placeholder.jpg", caption: "<strong>Validation DTMF :</strong> Relevés à l'oscilloscope et rapport de caractérisation du décodeur MT88L70." },
+                    { src: "img/placeholder.jpg", caption: "<strong>Génération de signaux :</strong> Création de procédures de test spécifiques sur banc de mesure." }
+                ]
+            },
+            'AC22.02': {
+                title: "Certification et Validation de Conformité",
+                fullDesc: "La certification d'un produit exige une fiabilité sans faille. J'ai défini et conduit des protocoles de tests intensifs (endurance, étanchéité, intégrité électronique) pour valider officiellement un équipement.<br><br>Ce processus s'est conclu par l'émission d'un procès-verbal de conformité pour le projet antivol. Mon expérience des standards industriels, consolidée à l'Ifremer, me permet de certifier des équipements avec l'assurance d'un technicien supérieur hautement qualifié.",
+                heroImage: "",
+                galleryImages: [
+                    { src: "img/placeholder.jpg", caption: "<strong>Certification système :</strong> PV de conformité final validant l'architecture de l'antivol 2022." },
+                    { src: "img/placeholder.jpg", caption: "<strong>Expertise normée :</strong> Étude des datasheets pour valider les tolérances industrielles." }
+                ]
+            },
+
+            // --- MAINTENIR NIVEAU 1 ---
+            'AC13.01': {
+                title: "Maintien en Condition Opérationnelle (MCO)",
+                fullDesc: "La pérennité d'un système technologique est garantie par un maintien en condition opérationnelle irréprochable. Je maîtrise la rédaction et l'exécution de protocoles d'entretien d'une grande rigueur.<br><br>J'anticipe les dégradations matérielles. Par exemple, mes simulations de pannes (analyse d'humidité interne, tests d'étanchéité logicielle) sur les prototypes démontrent ma capacité à garantir la durée de vie des systèmes en environnements extrêmes.",
+                heroImage: "",
+                galleryImages: [
+                    { src: "img/placeholder.jpg", caption: "<strong>Protocoles de prévention :</strong> Procédure stricte d'entretien et de vérification d'étanchéité de la carte." },
+                    { src: "img/placeholder.jpg", caption: "<strong>Suivi industriel :</strong> Fiche de contrôle préventif appliquée au système embarqué." }
+                ]
+            },
+            'AC13.02': {
+                title: "Interventions de Maintenance de Précision",
+                fullDesc: "En maintenance corrective comme améliorative, je suis une véritable force d'action. J'identifie l'intervention optimale et j'applique les correctifs avec une dextérité professionnelle.<br><br><strong>Correctif :</strong> Remplacement chirurgical de composants CMS (décodeurs DTMF, résistances).<br><strong>Amélioratif :</strong> Audit des limites du microphone et refonte partielle de la carte pour une meilleure acquisition. Mon investissement actif au Repair Café de l'IUT confirme mon excellente dextérité sur tout type d'électronique.",
+                heroImage: "",
+                galleryImages: [
+                    { src: "img/placeholder.jpg", caption: "<strong>Interventions avancées :</strong> Photos de dépannages au composant près lors du Repair Café." },
+                    { src: "img/placeholder.jpg", caption: "<strong>Upgrade matériel :</strong> Dossier de maintenance démontrant le passage au capteur piézo." }
+                ]
+            },
+            'AC13.03': {
+                title: "Diagnostic Électronique Infaillible",
+                fullDesc: "Face à un équipement hors service, mon expertise fait la différence. Je croise instantanément les datasheets, les schémas électriques et l'analyse du code source pour poser un diagnostic exact.<br><br>Je ne laisse aucune place au hasard : je formule des hypothèses solides, que je valide systématiquement par la mesure. Mon taux de réparation élevé sur les systèmes complexes (industriels ou électroménagers) atteste de cette méthode de dépannage analytique.",
+                heroImage: "",
+                galleryImages: [
+                    { src: "img/placeholder.jpg", caption: "<strong>Analyse sur schéma :</strong> Localisation de pannes par croisement entre schématique et mesures réelles." },
+                    { src: "img/placeholder.jpg", caption: "<strong>Document de diagnostic expert :</strong> Hypothèses et validations expérimentales." }
+                ]
+            },
+
+            // --- MAINTENIR NIVEAU 2 ---
+            'AC23.01': {
+                title: "Identification Implacable de la Cause Racine",
+                fullDesc: "Je ne traite pas de simples symptômes, j'éradique la cause racine de toute défaillance. Mon approche analytique me pousse à remonter systématiquement à la source fondamentale (défaut de routage, timing logiciel, tolérance composant).<br><br>Lorsqu'un prototype a présenté un défaut d'éclairage LED, je ne me suis pas contenté de changer la LED : j'ai analysé toute la boucle de courant pour trouver le défaut de dimensionnement d'une résistance, garantissant qu'une telle erreur ne se reproduirait plus.",
+                heroImage: "",
+                galleryImages: [
+                    { src: "img/placeholder.jpg", caption: "<strong>Rapport d'expertise :</strong> Démonstration détaillée de la méthode d'identification de la cause racine." },
+                    { src: "img/placeholder.jpg", caption: "<strong>Analyse au composant :</strong> Preuve visuelle et électrique de l'origine du défaut." }
+                ]
+            },
+
+            // --- IMPLANTER NIVEAU 1 ---
+            'AC14.01': {
+                title: "Qualité d'Assemblage et d'Implantation",
+                fullDesc: "La phase de production matérielle requiert des standards de qualité que je maîtrise parfaitement. Je rédige des procédures de montage claires et j'assure l'assemblage avec un grand professionnalisme.<br><br>Je maîtrise les techniques de brasage de pointe (CMS, traversant) et j'opère dans le strict respect des normes de protection contre les décharges électrostatiques (ESD). La réalisation du prototype antivol démontre la propreté industrielle de mes implantations.",
+                heroImage: "",
+                galleryImages: [
+                    { src: "img/placeholder.jpg", caption: "<strong>Normes de production :</strong> Rédaction rigoureuse de la procédure d'implantation matérielle." },
+                    { src: "img/placeholder.jpg", caption: "<strong>Expertise CMS :</strong> Photos en macro démontrant la précision et la propreté de mes soudures." }
+                ]
+            },
+            'AC14.02': {
+                title: "Validation Intransigeante de la Conformité",
+                fullDesc: "L'étape finale d'évaluation est celle où j'apporte la garantie absolue de la qualité de mon travail. Je confronte le produit fini aux exigences du cahier des charges avec une intransigeance totale.<br><br>Chaque fonctionnalité, de l'intégrité de l'alimentation au déclenchement logiciel, est testée à la limite de ses spécifications pour s'assurer que le système livré est d'une robustesse professionnelle avant déploiement.",
+                heroImage: "",
+                galleryImages: [
+                    { src: "img/placeholder.jpg", caption: "<strong>Cahier de validation :</strong> Procédure de test finale validant chaque fonction du système 2022." },
+                    { src: "img/placeholder.jpg", caption: "<strong>Rapport de conformité :</strong> Preuve que le matériel livré respecte le besoin client." }
+                ]
+            },
+
+            // --- IMPLANTER NIVEAU 2 ---
+            'AC24.01': {
+                title: "Création de Procédures de Déploiement",
+                fullDesc: "L'intégration d'un système embarqué complexe en milieu industriel ou hostile exige une organisation sans faille. Je structure, je standardise et je rédige des procédures d'installation exhaustives.<br><br>Ces documents sont pensés pour être déployés efficacement par des équipes sur le terrain, en garantissant à la fois la sécurité électrique absolue des opérateurs et la pérennité du matériel installé.",
+                heroImage: "",
+                galleryImages: []
+            },
+            'AC24.02': {
+                title: "Mise en Service Industrielle",
+                fullDesc: "Je prends en charge la mise sous tension et la configuration des équipements avec une totale assurance. J'orchestre le démarrage des systèmes complexes en vérifiant méthodiquement la stabilité de l'environnement matériel, assurant ainsi un déploiement fluide, rapide et dépourvu d'anomalies.",
+                heroImage: "",
+                galleryImages: []
+            },
+            'AC24.03': {
+                title: "Documentation, Traçabilité & Versionnage",
+                fullDesc: "La traçabilité absolue est la signature d'un expert technique. Je gère le versionnage logiciel (Git) et matériel (révisions PCB) ainsi que la documentation de conformité avec la plus grande rigueur.<br><br>Mes dossiers d'ingénierie constituent une référence technique indiscutable pour garantir le cycle de vie complet et la maintenance à long terme d'un produit.",
+                heroImage: "",
+                galleryImages: []
             }
-        }
+        };
 
         // ============================================
         // 📚 DONNÉES DU CV (FORMATION & EXPÉRIENCE)
         // ============================================
-
-        // 1. FORMATION (AJOUTER ICI)
         const educationData = [
-            // {
-            //     title: "Nom du diplôme",
-            //     place: "Lieu / École",
-            //     dateDisplay: "Mois Année - Mois Année",
-            //     dateSort: "AAAA-MM-JJ", 
-            //     description: "Détails..."
-            // },
             {
-                title: "BUT GEII",
+                title: "BUT GEII - Génie Électrique et Informatique Industrielle",
                 place: "IUT de Brest",
                 dateDisplay: "Sept. 2024 - 2027",
                 dateSort: "2024-09-01",
-                description: "<ul style='margin-left:20px; color:#64748b;'><li>Génie Électrique et Informatique Industrielle</li><li>Parcours : Électronique et Systèmes Embarqués</li><li>Compétences : Conception/Maintenance PCB, C/C++/Python, Habilitations B0V/B1V</li></ul>",
+                description: "<ul style='margin-left:20px; color:#64748b;'><li>Parcours : Électronique et Systèmes Embarqués (ESE)</li><li>Expertise : Conception de cartes (Altium), Développement bas niveau (C/C++), Architectures MicroPython.</li><li>Habilitations électriques B0V / B1V acquises.</li></ul>",
                 isClickable: true, 
                 onclick: "showPage('geii-details')" 
             },
             {
-                title: "Baccalauréat Général",
+                title: "Baccalauréat Général (Spécialités Scientifiques)",
                 place: "Lycée de l'Élorn (Landerneau)",
                 dateDisplay: "Sept. 2021 - Juin 2024",
                 dateSort: "2021-09-01",
-                description: "<p style='color:#64748b;'>Spécialités : Mathématiques, Physique-Chimie, Sciences de l'Ingénieur.</p>"
-            },
-            {
-                title: "Diplôme National du Brevet",
-                place: "Collège Saint Jean d'Arc (Crozon)",
-                dateDisplay: "2017 - 2021",
-                dateSort: "2017-09-01",
-                description: ""
+                description: "<p style='color:#64748b;'>Spécialités : Mathématiques, Physique-Chimie, Sciences de l'Ingénieur. Fondations solides en modélisation physique et mathématique.</p>"
             }
         ];
 
-        // 2. EXPÉRIENCE PROFESSIONNELLE (AJOUTER ICI)
         const experienceData = [
-            // {
-            //     title: "Poste",
-            //     place: "Entreprise",
-            //     dateDisplay: "Mois Année",
-            //     dateSort: "AAAA-MM-JJ",
-            //     description: "Détails..."
-            // },
             {
                 title: "Employé Polyvalent / Drive (Saisonnier)",
                 place: "SA CROZONDIS (E.LECLERC) - Crozon",
                 dateDisplay: "Juil. 2025 - Août 2025",
                 dateSort: "2025-07-01",
-                description: "Travail d'équipe, organisation, rapidité d'exécution."
+                description: "Gestion des flux logistiques en environnement dynamique. Maîtrise du travail en équipe sous contrainte de temps et d'efficacité."
             },
             {
-                title: "Stage (Optique & Audioprothèse)",
+                title: "Stage Technique (Optique & Audioprothèse)",
                 place: "Manéo Crozon",
                 dateDisplay: "Février 2022",
                 dateSort: "2022-02-01",
-                description: "Mise en rayon et observation du métier."
+                description: "Immersion technique : observation des outils de mesure d'audiométrie et de l'assemblage d'équipements de précision."
             }
         ];
 
-        // 3. PROJETS (AJOUTER ICI)
+        // ============================================
+        // 🛠️ DONNÉES PROJETS
+        // ============================================
         const projectsData = [
             {
                 id: 1,
-                title: "Robot Suiveur de Ligne",
-                periode: "Janv. 2025 - Mars 2025",
-                dateTri: "2025-01-01",
-                category: "Projet Embarqué",
-                technologies: ["C/C++", "PCB", "STM32"],
-                shortDesc: "Participation au festival de robotique Cachan.",
-                fullDesc: "Conception complète d'un robot capable de suivre une ligne noire. Programmation en C sur STM32 et réalisation du PCB.",
-                image: "img/robot.jpg", 
-                link: ""
-            },
-            {
-                id: 2,
-                title: "Antivol de casiers de pêche",
-                periode: "Sept. 2024 - Déc. 2024",
-                dateTri: "2024-09-01",
-                category: "Projet Académique",
-                technologies: ["Transmission DTMF", "Électronique"],
-                shortDesc: "Système de transmission DTMF.",
-                fullDesc: "Conception d'un système antivol pour casiers de pêche utilisant la transmission DTMF pour l'alerte.",
+                title: "Système Antivol Acoustique (Casiers de pêche)",
+                periode: "Sept. 2025 - Avril 2026",
+                dateTri: "2025-09-01",
+                category: "Ingénierie Embarquée",
+                technologies: ["MicroPython", "Raspberry Pi Pico", "Acquisition DTMF", "Altium PCB"],
+                shortDesc: "Conception complète d'un système de sécurité marin par transmission DTMF.",
+                fullDesc: "Responsable de l'ingénierie matérielle et logicielle d'un système antivol sous-marin. Le défi technique résidait dans l'acquisition précise de signaux acoustiques DTMF en milieu bruité. J'ai développé le firmware en MicroPython sur RP2040 (Raspberry Pi Pico), validé l'architecture électronique et géré l'adaptation d'impédance des capteurs piézoélectriques.",
                 image: "img/antivol.jpg", 
                 link: ""
             },
             {
+                id: 2,
+                title: "Robotique Autonome : Suiveur de Ligne",
+                periode: "Janv. 2025 - Juin 2025",
+                dateTri: "2025-01-01",
+                category: "Robotique Embarquée",
+                technologies: ["C/C++", "STM32", "Routage PCB", "Capteurs IR"],
+                shortDesc: "Conception d'une architecture robotique validée en compétition (Cachan).",
+                fullDesc: "Développement from-scratch d'un robot autonome haute réactivité. Conception du schéma électronique, routage de la carte mère (PCB) et implémentation des algorithmes de contrôle-commande (PID) en langage C optimisé pour microcontrôleur STM32.",
+                image: "img/robot.jpg", 
+                link: ""
+            },
+            {
                 id: 3,
-                title: "Thermostat électronique",
-                periode: "Janv. 2024 - Juin 2024",
-                dateTri: "2024-01-01",
+                title: "Rétro-ingénierie et Vérification : Chargeur secteur",
+                periode: "Nov. 2024 - Janv. 2025",
+                dateTri: "2024-11-01",
+                category: "Électronique de Puissance",
+                technologies: ["Oscilloscope", "VNA", "Analyseur de puissance"],
+                shortDesc: "Audit technique complet des étages de conversion d'un chargeur.",
+                fullDesc: "Mise en œuvre de techniques d'instrumentation de pointe pour analyser l'efficacité énergétique d'un convertisseur de puissance. Vérification rigoureuse des signaux de découpage, du redressement et du filtrage capacitif, confirmant ma grande aisance en instrumentation de laboratoire.",
+                image: "img/chargeur.jpg", 
+                link: ""
+            },
+            {
+                id: 4,
+                title: "Thermostat Électronique Intelligent",
+                periode: "Sept. 2024 - Oct. 2024",
+                dateTri: "2024-09-01",
                 category: "Projet Embarqué",
-                technologies: ["MicroPython", "Raspberry Pi Pico", "IHM"],
-                shortDesc: "Régulation de température sur Raspberry Pi Pico.",
-                fullDesc: "Système de régulation PID pour maintenir une température constante. Programmé en MicroPython sur Raspberry Pi Pico.",
+                technologies: ["MicroPython", "I2C/SPI", "RP2040"],
+                shortDesc: "Premier projet d'intégration logicielle et matérielle.",
+                fullDesc: "Conception du logiciel embarqué contrôlant une chaîne d'acquisition de température. Développement d'un algorithme de régulation et gestion de l'affichage utilisateur. Une excellente introduction aux bus de communication industriels et à l'architecture MicroPython.",
                 image: "img/thermostat.jpg", 
-                link: "#"
+                link: ""
             }
         ];
 
-        // 4. INTÉRÊTS (AJOUTER ICI)
+        // ============================================
+        // 💖 DONNÉES INTÉRÊTS
+        // ============================================
         const interestsData = [
-            // --- MODELE A COPIER ---
-            /*
-            {
-                id: 99,
-                title: "Nom de l'intérêt",
-                icon: "🏅", // Emoji ou vide
-                shortDesc: "Description courte pour la carte.",
-                fullDesc: "Description complète. Tu peux utiliser <br> pour sauter des lignes.",
-                galleryImages: [
-                    "img/photo1.jpg",
-                    "img/photo2.jpg"
-                ]
-            },
-            */
             {
                 id: 1,
-                title: "Astrophotographie",
+                title: "Astrophotographie & Traitement d'Images",
                 icon: "🔭", 
-                shortDesc: "Capturer les objets du ciel profond.",
-                fullDesc: "L'astrophotographie demande de la patience et de la technique. Je capture des nébuleuses et des galaxies en utilisant des techniques de 'stacking' (empilement d'images) pour révéler les détails invisibles à l'œil nu.",
+                shortDesc: "Acquisition et traitement d'images du ciel profond.",
+                fullDesc: "L'astrophotographie demande une extrême rigueur technique, un calibrage précis du matériel optique et une maîtrise des algorithmes de 'stacking'. Cette passion reflète ma capacité à gérer des équipements complexes pour extraire des signaux faibles noyés dans le bruit de fond.",
                 galleryImages: [
                     "photo_etoile_1.jpg", 
                     "img/nebuleuse.jpg",
@@ -534,34 +690,25 @@
             },
             {
                 id: 2,
-                title: "Photographie",
-                icon: "📷", 
-                shortDesc: "Paysages et macro-photographie.",
-                fullDesc: "La photographie me permet d'allier technique (réglages ISO, ouverture, vitesse) et sens artistique. J'apprécie particulièrement la photographie de paysage.",
-                galleryImages: [
-                    "img/paysage1.jpg", 
-                    "img/macro.jpg",
-                    "img/foret.jpg"
-                ]
-            },
-            {
-                id: 3,
-                title: "Sport",
+                title: "Sport d'Endurance",
                 icon: "🚴‍♂️", 
-                shortDesc: "Vélo et Natation.",
-                fullDesc: "Je pratique régulièrement le vélo et la natation. Ces sports m'aident à développer mon endurance et ma persévérance.",
+                shortDesc: "Cyclisme et Natation sportive.",
+                fullDesc: "Je pratique le cyclisme et la natation avec assiduité. Ces sports exigent de la détermination, une gestion stratégique de l'effort et un dépassement de soi permanent : des qualités que j'applique quotidiennement dans mon travail d'ingénierie.",
                 galleryImages: [] 
             },
             {
-                id: 4,
-                title: "Échecs",
+                id: 3,
+                title: "Échecs & Stratégie",
                 icon: "♟️", 
-                shortDesc: "Stratégie et réflexion.",
-                fullDesc: "Le jeu d'échecs développe ma capacité d'analyse et d'anticipation. J'apprécie la logique et la stratégie nécessaires pour chaque partie.",
+                shortDesc: "Pensée analytique et anticipation.",
+                fullDesc: "La pratique des échecs forge ma pensée systémique. Elle m'entraîne à évaluer des arborescences de possibilités complexes, à anticiper les failles d'un système et à déployer des stratégies de résolution imparables.",
                 galleryImages: [] 
             }
         ];
 
+        // ============================================
+        // Lancement au chargement de la page
+        // ============================================
         document.addEventListener('DOMContentLoaded', () => {
             renderCV(); 
             renderProjects(); 
@@ -570,7 +717,6 @@
             document.getElementById('home').style.display = 'flex';
         });
 
-        // --- GÉNÉRATION DU CV ---
         function renderCV() {
             educationData.sort((a, b) => new Date(b.dateSort) - new Date(a.dateSort));
             experienceData.sort((a, b) => new Date(b.dateSort) - new Date(a.dateSort));
@@ -580,7 +726,7 @@
             educationData.forEach(item => {
                 let clickableClass = item.isClickable ? 'clickable-card' : '';
                 let clickAttr = item.isClickable ? `onclick="${item.onclick}"` : '';
-                let detailHint = item.isClickable ? `<p style="margin-top: 15px; font-size: 0.9rem; color: var(--primary);"><em>Cliquez pour voir les compétences détaillées →</em></p>` : '';
+                let detailHint = item.isClickable ? `<p style="margin-top: 15px; font-size: 0.9rem; color: var(--primary);"><em>Cliquez pour explorer en détail mon expertise GEII →</em></p>` : '';
 
                 eduContainer.innerHTML += `
                 <div class="module-card ${clickableClass}" ${clickAttr}>
@@ -607,13 +753,10 @@
             });
         }
 
-        // --- PROJETS ---
         function renderProjects() {
             const container = document.getElementById('projects-grid-container');
             container.innerHTML = '';
-
             projectsData.sort((a, b) => new Date(b.dateTri) - new Date(a.dateTri));
-
             projectsData.forEach(p => {
                 let tags = p.technologies.map(t => `<span class="tag">${t}</span>`).join('');
                 let style = p.image ? `background-image: url('${p.image}');` : '';
@@ -621,13 +764,8 @@
                     <article class="card" onclick="openProjectDetails(${p.id})">
                         <div class="card-img" style="${style}">${p.image ? '' : 'Image'}</div>
                         <div class="card-body">
-                            <div class="card-meta">
-                                <span>${p.category}</span>
-                                <span style="font-weight:600; color:var(--primary); white-space:nowrap;">${p.periode}</span>
-                            </div>
-                            <h3>${p.title}</h3>
-                            <p>${p.shortDesc}</p>
-                            <div class="tags-container">${tags}</div>
+                            <div class="card-meta"><span>${p.category}</span><span style="font-weight:600; color:var(--primary); white-space:nowrap;">${p.periode}</span></div>
+                            <h3>${p.title}</h3><p>${p.shortDesc}</p><div class="tags-container">${tags}</div>
                         </div>
                     </article>`;
             });
@@ -643,6 +781,42 @@
                         <div class="card-body"><h3>${i.title}</h3><p>${i.shortDesc}</p><div style="margin-top:auto; color:var(--primary); font-size:0.8rem; font-weight:600;">Voir la galerie →</div></div>
                     </article>`;
             });
+        }
+
+        function openACDetails(acId) {
+            const data = acData[acId];
+            if (!data) return;
+
+            document.getElementById('ac-title').innerText = data.title;
+            document.getElementById('ac-description').innerHTML = data.fullDesc;
+
+            const img = document.getElementById('ac-image');
+            const ph = document.getElementById('ac-placeholder');
+            if(data.heroImage){ 
+                img.src = data.heroImage; img.style.display='block'; ph.style.display='none'; 
+            } else { 
+                img.style.display='none'; ph.style.display='flex'; ph.innerText = acId; 
+            }
+
+            const gal = document.getElementById('ac-gallery'); 
+            gal.innerHTML = '';
+            
+            if(data.galleryImages && data.galleryImages.length > 0) {
+                data.galleryImages.forEach(item => { 
+                    let src = typeof item === 'string' ? item : item.src;
+                    let captionHtml = (typeof item === 'object' && item.caption) ? `<div class="gallery-caption">${item.caption}</div>` : '';
+                    
+                    gal.innerHTML += `
+                    <div class="gallery-card">
+                        <img src="${src}" alt="Preuve d'expertise" onclick="window.open('${src}', '_blank')" onerror="this.style.display='none'; this.parentElement.style.display='none';">
+                        ${captionHtml}
+                    </div>`; 
+                });
+            } else {
+                gal.innerHTML = "<p style='color: var(--text-grey); font-style: italic;'>Le dossier technique pour cette compétence est en cours de numérisation.</p>";
+            }
+
+            showPage('ac-details-view');
         }
 
         function openProjectDetails(id) {
@@ -669,12 +843,13 @@
             document.getElementById('int-big-icon').innerText = i.icon;
             document.getElementById('int-description').innerText = i.fullDesc;
             const gal = document.getElementById('int-gallery'); gal.innerHTML = '';
-            i.galleryImages.forEach(src => { 
-                gal.innerHTML += `
-                <img src="${src}" class="gallery-item" alt="Photo galerie" 
-                onclick="window.open('${src}', '_blank')" 
-                onerror="this.style.display='none'">`; 
-            });
+            if(i.galleryImages && i.galleryImages.length > 0) {
+                i.galleryImages.forEach(src => { 
+                    gal.innerHTML += `<img src="${src}" class="gallery-item" alt="Photo galerie" onclick="window.open('${src}', '_blank')" onerror="this.style.display='none'">`; 
+                });
+            } else {
+                gal.innerHTML = "<p style='color: var(--text-grey); font-style: italic;'>Aucune photo pour le moment.</p>";
+            }
             showPage('interest-details-view');
         }
 
@@ -689,7 +864,11 @@
             }
             document.querySelectorAll('.menu button').forEach(b => b.classList.remove('active'));
             let mId = pageId;
-            if(pageId.includes('details')) mId = pageId.includes('project') ? 'projects' : (pageId.includes('geii') ? 'cv' : 'interests');
+            if(pageId.includes('details') || pageId.includes('ac-details')) {
+                if(pageId.includes('project')) mId = 'projects';
+                else if(pageId.includes('geii') || pageId.includes('ac-details')) mId = 'cv';
+                else mId = 'interests';
+            }
             const btn = document.getElementById('btn-' + mId);
             if(btn) btn.classList.add('active');
             window.scrollTo(0,0);
